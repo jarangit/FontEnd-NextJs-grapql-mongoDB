@@ -3,6 +3,7 @@ import Link from 'next/link'
 const Menu = () => {
     return(
         <div>
+            <h1> THE GUITAR NEXT </h1>
             <ul>
                 <li>
                     <Link href = "/" key = "home">
