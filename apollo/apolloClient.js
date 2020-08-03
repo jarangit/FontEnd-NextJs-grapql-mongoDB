@@ -4,6 +4,7 @@ import { setContext } from "apollo-link-context"
 import { InMemoryCache } from "apollo-cache-inmemory"
 import fetch from "isomorphic-unfetch"
 import withApollo from "next-with-apollo"
+import { ApolloProvider } from "@apollo/react-hooks"
 
 const uri = "http://localhost:4444/graphql"
 
@@ -26,4 +27,13 @@ export default withApollo(({ initialState }) => {
     link: authLink.concat(httpLink),
     cache: new InMemoryCache().restore(initialState || {})
   })
+},{
+  //ใช้ apolloprovider ในบางเพจ
+  render: ({ Page, props }) => {
+    return(
+      <ApolloProvider client = { props.apollo } >
+        <Page {... props} />
+      </ApolloProvider>
+    )
+  }
 })

@@ -6,7 +6,7 @@ import Layout from '../component/Layout/layout'
 export default function Home() {
   return (
     <div>
-      this index
+      this content
     </div>
   )
 }

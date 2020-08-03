@@ -1,6 +1,17 @@
 import React from 'react'
 import { useQuery } from "@apollo/react-hooks"
 import gql from "graphql-tag"
+import styled from 'styled-components'
+import apolloClient from '../../apollo/apolloClient'
+const BoxPro = styled.div`
+  display: flex;
+  div{
+    border: 1px solid;
+    margin: 10px;
+    padding: 10px;
+  }
+`
+
 
 const QUERY_PRODUCTS = gql`
   query {
@@ -14,14 +25,14 @@ const QUERY_PRODUCTS = gql`
   }
 `
 const ProductPage = () => {
-    const { data, loading, error } = useQuery(QUERY_PRODUCTS)
+    const { data, loading, error } = useQuery(QUERY_PRODUCTS, {pollInterval: 3000})
 
   if (error) return <p>Ooobs...something went wrong, please try again later.</p>
 
   if (loading) return <p>Loading...</p>
     console.log(data)
     return (
-        <div>
+        <BoxPro>
             {data.products.map(items => {
                 return(
                     <div key = {items.id} >
@@ -31,8 +42,8 @@ const ProductPage = () => {
                     </div>
                 )
             })}
-        </div>
+        </BoxPro>
     )
 }
 
-export default ProductPage
+export default apolloClient(ProductPage)
