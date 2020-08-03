@@ -3,6 +3,8 @@ import { useQuery } from "@apollo/react-hooks"
 import gql from "graphql-tag"
 import styled from 'styled-components'
 import apolloClient from '../../apollo/apolloClient'
+import Link from 'next/link'
+
 const BoxPro = styled.div`
   display: flex;
   div{
@@ -36,9 +38,12 @@ const ProductPage = () => {
             {data.products.map(items => {
                 return(
                     <div key = {items.id} >
-                        <h3>{items.name}</h3>
-                        <p>{items.price}</p>
                         <img src = {items.imageUrl} width = "100" /> 
+                        <Link  href = "/products/[prodoctID]" as = {`/products/${items.id}`}>
+                          <a > <h3>{items.name}</h3> </a>
+                        </Link>
+                        <p>{items.price}</p>
+                          <button> Add to cart </button>
                     </div>
                 )
             })}

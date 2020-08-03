@@ -15,6 +15,21 @@ const Menu = () => {
                         <a> Product </a>
                     </Link>
                 </li>
+                <li>
+                    <Link href = "/" >
+                        <a> Cart </a>
+                    </Link>
+                </li>
+                <li>
+                    <Link href = "/signUp" >
+                        <a> Sign Up </a>
+                    </Link>
+                </li>
+                <li>
+                    <Link href = "/signIn">
+                        <a> Sign In </a>
+                    </Link>
+                </li>
             </ul>
         </div>
     )
