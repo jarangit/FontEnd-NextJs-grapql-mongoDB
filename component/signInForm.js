@@ -1,8 +1,10 @@
+import React, {useState} from 'react'
 import styled from 'styled-components'
 import { useMutation } from '@apollo/react-hooks'
 import gql from "graphql-tag"
 import Link from "next/link"
-import React, {useState} from 'react'
+import Cookies from 'js-cookie'
+import Router from 'next/router'
 
 
 //Sty
@@ -57,11 +59,13 @@ const SignInForm = () => {
         variables: { ...userInfo },
         onCompleted: data => {
             if (data) {
+                Cookies.set('jwt', data.login.jwt)
                 console.log(data)
                 setUserInfo({
                     email: " ",
                     password: " "
                 })
+                Router.push('/products')
             }
         }
     })

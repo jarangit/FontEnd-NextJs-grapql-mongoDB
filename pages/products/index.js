@@ -27,7 +27,7 @@ const QUERY_PRODUCTS = gql`
   }
 `
 const ProductPage = () => {
-    const { data, loading, error } = useQuery(QUERY_PRODUCTS, {pollInterval: 3000})
+    const { data, loading, error } = useQuery(QUERY_PRODUCTS)
 
   if (error) return <p>Ooobs...something went wrong, please try again later.</p>
 

@@ -4,12 +4,11 @@ import { useMutation  } from '@apollo/react-hooks'
 import gql from "graphql-tag"
 import Link from "next/link"
 
-
 //Sty
 const FormSty = styled.form`
     width: 200px;
     margin: 0 auto;
-    align-items: center;
+    /* align-items: center; */
 `
 //END STY
 
@@ -78,24 +77,25 @@ const SignUpForm = () => {
                 <input type = "text" name = "email" placeholder = "Email"  onChange = {handleChange} value = { userInfo.email } />
                 <input type = "text" name = "password" placeholder = "Password"  onChange = {handleChange} value = { userInfo.password } />
                 <button type = "submit"> Sign Up </button>
+
+                <div style={{color: "green"}}>
+                    {success && (
+                        <p>
+                            You successfully signed up, please{" "}
+                            <Link href="/signIn">
+                            <a>sign in</a>
+                            </Link>
+                            .
+                        </p>
+                    )}
+
+                    {error && (
+                        <p style={{ color: "red" }}>{error.graphQLErrors[0].message}</p>
+                    )}
+                </div>
             </FormSty>
-
-            <div style={{ width: "30%", margin: "auto" ,  color: "green"}}>
-                {success && (
-                    <p>
-                        You successfully signed up, please{" "}
-                        <Link href="/signIn">
-                        <a>sign in</a>
-                        </Link>
-                        .
-                    </p>
-                )}
-
-                {error && (
-                    <p style={{ color: "red" }}>{error.graphQLErrors[0].message}</p>
-                )}
-            </div>
         </div>
+
     )
 }
 

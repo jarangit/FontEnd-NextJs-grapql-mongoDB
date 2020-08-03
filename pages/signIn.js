@@ -4,7 +4,6 @@ import SignInForm from '../component/signInForm'
 import apolloClient from '../apollo/apolloClient'
 
 
-
 const FormSty = styled.form`
     width: 200px;
     margin: 0 auto;
