@@ -2,7 +2,6 @@ import React from 'react'
 import { useQuery } from "@apollo/react-hooks"
 import gql from "graphql-tag"
 import styled from 'styled-components'
-import apolloClient from '../../apollo/apolloClient'
 import Link from 'next/link'
 
 const BoxPro = styled.div`
@@ -51,4 +50,4 @@ const ProductPage = () => {
     )
 }
 
-export default apolloClient(ProductPage)
+export default ProductPage

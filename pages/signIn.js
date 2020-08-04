@@ -17,4 +17,4 @@ const SignIn = () => {
     )
 }
 
-export default apolloClient(SignIn)
+export default SignIn

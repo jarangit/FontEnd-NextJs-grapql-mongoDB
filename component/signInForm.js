@@ -1,10 +1,11 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import styled from 'styled-components'
 import { useMutation } from '@apollo/react-hooks'
 import gql from "graphql-tag"
 import Link from "next/link"
 import Cookies from 'js-cookie'
 import Router from 'next/router'
+import { AuthContext } from '../appState/authProvider'
 
 
 //Sty
@@ -50,11 +51,19 @@ const LOG_IN = gql`
 
 const SignInForm = () => {
 
+    //HOOK
     const [userInfo, setUserInfo] = useState({
         email: "",
         password: ""
     })
 
+    //useContext from  appState for change menu when user login
+    const { setAuthUser } = useContext(AuthContext)
+
+
+    //END HOOK
+
+    //FUNC
     const [login, { loading, error }] = useMutation(LOG_IN, {
         variables: { ...userInfo },
         onCompleted: data => {
@@ -65,6 +74,7 @@ const SignInForm = () => {
                     email: " ",
                     password: " "
                 })
+                setAuthUser(data.login.user)
                 Router.push('/products')
             }
         }
@@ -85,6 +95,8 @@ const SignInForm = () => {
             console.log(error)
         }
     }
+
+    //END FUNC
 
     //VIEW
     return (

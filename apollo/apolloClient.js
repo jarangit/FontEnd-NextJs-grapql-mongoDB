@@ -41,11 +41,11 @@ export default withApollo(({ initialState }) => {
   })
 },{
   //ใช้ apolloprovider ในบางเพจ
-  render: ({ Page, props }) => {
-    return(
-      <ApolloProvider client = { props.apollo } >
-        <Page {... props} />
-      </ApolloProvider>
-    )
-  }
+  // render: ({ Page, props }) => {
+  //   return(
+  //     <ApolloProvider client = { props.apollo } >
+  //       <Page {... props} />
+  //     </ApolloProvider>
+  //   )
+  // }
 })
