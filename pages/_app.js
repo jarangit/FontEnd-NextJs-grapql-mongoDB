@@ -5,6 +5,7 @@ import apolloClient from "../apollo/apolloClient"
 import { ApolloProvider } from "@apollo/react-hooks"
 import fetch from "isomorphic-unfetch"
 import cookie from "cookie"
+import { Router } from 'next/router'
 
 
 
@@ -45,18 +46,28 @@ function MyApp({ Component, pageProps, apollo, user }) {
   )
 }
 
-MyApp.getInitialProps = async ({ ctx }) => {
+MyApp.getInitialProps = async ({ ctx, router }) => {
   if (process.browser) {
     return __NEXT_DATA__.props.pageProps
   }
-  console.log(ctx.req.headers)
+  console.log(router)
 
   const { headers } = ctx.req
 
   const cookies = headers && cookie.parse(headers.cookie || "")
 
   const token = cookies && cookies.jwt
+
+  if ( !token ) {
+    if ( router.pathname === '/cart' ){
+      ctx.res.writeHead(302, { Location: "/signIn" })
+      ctx.res.end()
+    }
+    return null
+  }
   console.log(token)
+
+
   const response = await fetch("http://localhost:4444/graphql", {
     method: 'post',
     headers: {
@@ -71,6 +82,10 @@ MyApp.getInitialProps = async ({ ctx }) => {
     console.log(result)
     return { user: result.data.user }
   } else {
+    if ( router.pathname === '/cart' ){
+      ctx.res.writeHead(302, { Location: "/sigIn" })
+      ctx.res.end()
+    }
     return null
   }
 }

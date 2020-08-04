@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
+import Router from 'next/router'
 
 const Cart = () => {
     return (
