@@ -5,7 +5,7 @@ import { AuthContext } from '../../appState/authProvider'
 
 const Menu = () => {
 
-    const { user } = useContext(AuthContext)
+    const { user, Signout } = useContext(AuthContext)
 
     console.log(user)
     return(
@@ -25,11 +25,11 @@ const Menu = () => {
                 {user && (
                    <>
                     <li>
-                        <Link href = "/" >
+                        <Link href = "/cart" >
                             <a> Cart </a>
                         </Link>
                     </li>
-                    <button> Logout </button>
+                    <button onClick = { Signout } > Logout </button>
                     <li>
                         <strong> {user.name} </strong>
                     </li>

@@ -6,7 +6,7 @@ import Layout from '../component/Layout/layout'
 export default function Home() {
   return (
     <div>
-      this content
+            <h1 style = { {textAlign: "center"} } > HOME </h1>
     </div>
   )
 }

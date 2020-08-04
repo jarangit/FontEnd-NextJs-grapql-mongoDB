@@ -33,7 +33,9 @@ const ProductPage = () => {
   if (loading) return <p>Loading...</p>
     console.log(data)
     return (
-        <BoxPro>
+        <div>
+            <h1 style = { {textAlign: "center"} } > PRODUCT </h1>
+            <BoxPro>
             {data.products.map(items => {
                 return(
                     <div key = {items.id} >
@@ -46,7 +48,8 @@ const ProductPage = () => {
                     </div>
                 )
             })}
-        </BoxPro>
+          </BoxPro>
+        </div>
     )
 }
 
