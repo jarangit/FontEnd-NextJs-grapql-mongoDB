@@ -10,7 +10,7 @@ import { AuthContext } from '../appState/authProvider'
 
 //Sty
 const FormSty = styled.form`
-    width: 200px;
+    width: 300px;
     margin: 0 auto;
     align-items: center;
 `
@@ -105,7 +105,12 @@ const SignInForm = () => {
                 <h3>Sign up</h3>
                 <input type="text" name="email" placeholder="Email" onChange = {handleChange}/>
                 <input type="text" name="password" placeholder="Password" onChange = {handleChange} />
+                <div>
                 <button type="submit"> Sign Up </button>
+                    <p> 
+                        Forgot password ? <Link href="/resetPassword"><a>Click here</a></Link> 
+                    </p>
+                </div>
                 <div>
                     {error && (
                     <p style={{ color: "red" }}>{error.graphQLErrors[0].message}</p>

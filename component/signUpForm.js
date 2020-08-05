@@ -20,7 +20,6 @@ const SIGN_UP = gql`
         signup ( name: $name, email: $email, password: $password ) { 
             name
             email	
-            password
         }
     }
 `
@@ -88,9 +87,8 @@ const SignUpForm = () => {
                             .
                         </p>
                     )}
-
                     {error && (
-                        <p style={{ color: "red" }}>{error.graphQLErrors[0].message}</p>
+                    <p style={{ color: "red" }}>{error.graphQLErrors[0].message}</p>
                     )}
                 </div>
             </FormSty>

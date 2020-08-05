@@ -39,13 +39,15 @@ export default withApollo(({ initialState }) => {
     link: authLink.concat(httpLink),
     cache: new InMemoryCache().restore(initialState || {})
   })
-},{
-  //ใช้ apolloprovider ในบางเพจ
-  // render: ({ Page, props }) => {
-  //   return(
-  //     <ApolloProvider client = { props.apollo } >
-  //       <Page {... props} />
-  //     </ApolloProvider>
-  //   )
-  // }
-})
+}
+// {
+//   //ใช้ apolloprovider ในบางเพจ
+//   render: ({ Page, props }) => {
+//     return(
+//       <ApolloProvider client = { props.apollo } >
+//         <Page {... props} />
+//       </ApolloProvider>
+//     )
+//   }
+// }
+)

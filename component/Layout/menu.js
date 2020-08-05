@@ -23,7 +23,9 @@ const MenuSyt = styled.div`
     justify-content: space-between;
     height: 100px;
     align-items: center;
-
+    h1 {
+        color: #72ffd4;
+    }
     a {
         color: white;
         text-decoration: none;
