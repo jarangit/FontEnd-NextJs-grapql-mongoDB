@@ -6,6 +6,7 @@ import Link from 'next/link'
 
 const BoxPro = styled.div`
   display: flex;
+  flex-wrap: wrap;
   div{
     border: 1px solid;
     margin: 10px;

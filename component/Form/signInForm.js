@@ -5,7 +5,7 @@ import gql from "graphql-tag"
 import Link from "next/link"
 import Cookies from 'js-cookie'
 import Router from 'next/router'
-import { AuthContext } from '../appState/authProvider'
+import { AuthContext } from '../../appState/authProvider'
 
 
 //Sty
