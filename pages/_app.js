@@ -59,8 +59,8 @@ MyApp.getInitialProps = async ({ ctx, router }) => {
   const token = cookies && cookies.jwt
 
   if ( !token ) {
-    if ( router.pathname === '/cart' ){
-      ctx.res.writeHead(302, { Location: "/signIn" })
+    if ( router.pathname === '/cart' || router.pathname === '/manageProduct'){
+      ctx.res.writeHead(302, { Location: "register/signIn" })
       ctx.res.end()
     }
     return null

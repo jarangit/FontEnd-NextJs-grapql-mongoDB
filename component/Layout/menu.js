@@ -80,6 +80,11 @@ const Menu = () => {
                             <a> Cart </a>
                         </Link>
                     </li>
+                    <li>
+                        <Link href = "/manageProduct" >
+                            <a> Your product </a>
+                        </Link>
+                    </li>
                     <li className = "email-user">
                         <Link href = "/cart" >
                             <a> {user.email} </a>

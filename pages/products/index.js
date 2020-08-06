@@ -15,7 +15,7 @@ const BoxPro = styled.div`
 `
 
 
-const QUERY_PRODUCTS = gql`
+export const QUERY_PRODUCTS = gql`
   query {
     products {
       name  
