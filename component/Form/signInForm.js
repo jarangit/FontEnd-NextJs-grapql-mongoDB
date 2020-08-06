@@ -30,6 +30,8 @@ const LOG_IN = gql`
                 products {
                     id
                     name
+                    price
+                    description
                 }
                 carts {
                     id

@@ -14,6 +14,7 @@ const AuthProvider = ({children, userData}) => {
             if ( e.key === 'logout' ) {
                 setUser(null)
                 Router.push("/products")
+                window.history.clear();
             }
         }
 
@@ -32,7 +33,7 @@ const AuthProvider = ({children, userData}) => {
 
     const Signout = () => {
         Cookies.remove('jwt')
-        setUser(null)
+        setUser('')
         localStorage.setItem("logout", Date.now())
         Router.push('/products')
     }

@@ -86,7 +86,7 @@ const Menu = () => {
                         </Link>
                     </li>
                     <li className = "email-user">
-                        <Link href = "/cart" >
+                        <Link href = "/user/[userID]" as = {`/user/${user.id}`} >
                             <a> {user.email} </a>
                         </Link>
                     </li>

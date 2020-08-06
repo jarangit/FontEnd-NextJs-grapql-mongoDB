@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useMutation } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import { QUERY_PRODUCTS } from '../../pages/products'
+import { QUERY_PRODUCTS } from './showAllProduct'
 
 
 
@@ -45,7 +45,9 @@ const CreateProductForm = () => {
         price: ''
       })
 
-      const [createProduct, { loading, error }] = useMutation (CREATE_PRODUCT, {
+    const [success, setSuccess] = useState('')
+
+    const [createProduct, { loading, error }] = useMutation (CREATE_PRODUCT, {
         variables: { ...productData, price: +productData.price },
         refetchQueries: [{ query: QUERY_PRODUCTS }]
     })
@@ -59,6 +61,13 @@ const CreateProductForm = () => {
             e.preventDefault()
             console.log(productData)
             const result = await createProduct()
+            setSuccess("เรียบร้อย")
+            setProductData({
+                name: '',
+                description: '',
+                imageUrl: '',
+                price: ''
+              })
         } catch (error) {
             console.log(error)
         }
@@ -82,6 +91,7 @@ const CreateProductForm = () => {
                 </div>
                 <button type = "submit"> Update </button>
             </form>
+            <strong> {success} </strong>
             <p>https://www.loveyouflower.com/wp-content/uploads/2014/02/A084.jpg</p>
             <div style={{ width: '30%', margin: 'auto' }}>
                 {error && (
