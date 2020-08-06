@@ -81,7 +81,7 @@ const SignUpForm = () => {
                     {success && (
                         <p>
                             You successfully signed up, please{" "}
-                            <Link href="/signIn">
+                            <Link href="/register/signIn">
                             <a>sign in</a>
                             </Link>
                             .

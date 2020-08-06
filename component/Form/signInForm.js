@@ -108,7 +108,7 @@ const SignInForm = () => {
                 <div>
                 <button type="submit"> Sign Up </button>
                     <p> 
-                        Forgot password ? <Link href="/resetPassword"><a>Click here</a></Link> 
+                        Forgot password ? <Link href="/register/requestPassword"><a>Click here</a></Link> 
                     </p>
                 </div>
                 <div>

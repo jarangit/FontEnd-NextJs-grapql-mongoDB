@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import styled from 'styled-components'
-import SignInForm from '../component/Form/signInForm'
-import apolloClient from '../apollo/apolloClient'
+import SignInForm from '../../component/Form/signInForm'
+import apolloClient from '../../apollo/apolloClient'
 
 
 const FormSty = styled.form`

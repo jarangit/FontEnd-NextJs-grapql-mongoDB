@@ -91,12 +91,12 @@ const Menu = () => {
                 {!user && (
                    <>
                     <li>
-                        <Link href = "/signUp" >
+                        <Link href = "/register/signUp" >
                           <a> Sign Up </a>
                         </Link>
                     </li>
                     <li>
-                        <Link href = "/signIn">
+                        <Link href = "/register/signIn">
                             <a> Sign In </a>
                         </Link>
                     </li>
