@@ -74,7 +74,7 @@ const SignUpForm = () => {
                 <h3>Sign up</h3>
                 <input type = "text" name = "name" placeholder = "Username" onChange = {handleChange} value = { userInfo.name }/>
                 <input type = "text" name = "email" placeholder = "Email"  onChange = {handleChange} value = { userInfo.email } />
-                <input type = "text" name = "password" placeholder = "Password"  onChange = {handleChange} value = { userInfo.password } />
+                <input type = "password" name = "password" placeholder = "Password"  onChange = {handleChange} value = { userInfo.password } />
                 <button type = "submit"> Sign Up </button>
 
                 <div style={{color: "green"}}>

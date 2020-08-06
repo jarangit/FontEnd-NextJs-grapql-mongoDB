@@ -6,30 +6,31 @@ import { useRouter } from 'next/router'
 
 
 //DATA
-// const REQUEST_RESET_PASSWORD = gql`
-//   mutation REQUEST_RESET_PASSWORD($email: String!) {
-//     requestResetPassword (email: $email) {
-//         message
-//     }
-//   }
-// `
+const RESET_RESET_PASSWORD = gql`
+  mutation RESET_RESET_PASSWORD($password: String!, $token: String!) {
+    resetResetPassword (password: $password, token: $token) {
+        message
+    }
+  }
+`
 //VIEW
 const ResetPasswordForm = () => {
     const [password, setPassword] = useState("")
+    const [message, setMessage] = useState("")
 
     const router = useRouter()
-    console.log(router.query)
-    // const [requestResetPassword, { loading, error }] = useMutation(
-    //     REQUEST_RESET_PASSWORD,
-    //     {
-    //       variables: { email },
-    //       onCompleted: data => {
-    //         if (data) {
-    //           setMessage(data.requestResetPassword.message)
-    //         }
-    //       }
-    //     }
-    //   )
+    console.log(router.query.resetToken)
+    const [resetResetPassword, { loading, error }] = useMutation(
+        RESET_RESET_PASSWORD,
+        {
+          variables: { password, token: router && router.query.resetToken},
+          onCompleted: data => {
+            if (data) {
+              setMessage(data.resetResetPassword.message)
+            }
+          }
+        }
+      )
 
       const handleChange = e => {
         setPassword(e.target.value)
@@ -40,7 +41,9 @@ const ResetPasswordForm = () => {
     const handleSubmit = async e => {
         try {
           e.preventDefault()
-          // await requestResetPassword()
+          setPassword('')
+          await resetResetPassword()
+          console.log(password)
         } catch (error) {
           console.log(error)
         }
@@ -50,15 +53,15 @@ const ResetPasswordForm = () => {
         <div>
             <form onSubmit = {handleSubmit}>
                 <p> New Password </p>
-                <input placeholder = "New password" onChange = {handleChange}   />     
+                <input type = "password" placeholder = "New password" onChange = {handleChange}  value = {password} />     
                 <button type = "submit" > Submit </button> 
-                <div style = {{color: "green"}} ><strong> 123 </strong></div>
+                <div style = {{color: "green"}} ><strong> {message} </strong></div>
             </form>
-            {/* <div>
+            <div>
                     {error && (
                     <p style={{ color: "red" }}>{error.graphQLErrors[0].message}</p>
                     )}
-                </div> */}
+                </div>
         </div>
     )
 }

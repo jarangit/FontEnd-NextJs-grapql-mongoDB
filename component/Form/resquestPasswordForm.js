@@ -39,6 +39,7 @@ const RequestPasswordForm = () => {
     const handleSubmit = async e => {
         try {
           e.preventDefault()
+          setEmail('')
           await requestResetPassword()
         } catch (error) {
           console.log(error)
@@ -49,7 +50,7 @@ const RequestPasswordForm = () => {
         <div>
             <form onSubmit = {handleSubmit} >
                 <p> Your Email </p>
-                <input placeholder = "your email"  onChange = {handleChange} />     
+                <input placeholder = "your email"  onChange = {handleChange} value = {email} />     
                 <button type = "submit" > Submit </button> 
                 <div style = {{color: "green"}} ><strong> {message} </strong></div>
             </form>

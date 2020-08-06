@@ -104,7 +104,7 @@ const SignInForm = () => {
             <FormSty onSubmit={handleSubmit}>
                 <h3>Sign up</h3>
                 <input type="text" name="email" placeholder="Email" onChange = {handleChange}/>
-                <input type="text" name="password" placeholder="Password" onChange = {handleChange} />
+                <input type="password" name="password" placeholder="Password" onChange = {handleChange} />
                 <div>
                 <button type="submit"> Sign Up </button>
                     <p> 
