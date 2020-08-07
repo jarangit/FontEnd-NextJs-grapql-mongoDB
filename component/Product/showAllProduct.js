@@ -56,7 +56,7 @@ const ShowAllProduct = () => {
                           {user && user.id === items.user.id ?(
                             <button onClick = {() => Router.push('/manageProduct')} > Your Product </button>
                             ):(
-                              <button > Add to cart </button>
+                              <button style = {{background: "green"}}  > Add to cart </button>
                           )}
                     </div>
                 )

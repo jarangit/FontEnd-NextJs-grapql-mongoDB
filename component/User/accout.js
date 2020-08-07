@@ -1,37 +1,19 @@
 import React, { useContext } from 'react'
 import { useQuery } from "@apollo/react-hooks"
 import gql from "graphql-tag"
+import { AuthContext } from '../../appState/authProvider'
 
-
-export const ME = gql`
-  query ME {
-    user {
-      id
-      name
-      email
-      products {
-        id
-        description
-        imageUrl
-        price
-      }
-    }
-  }
-`
 
 const UserData = () => {
+  const { user } = useContext(AuthContext)
 
-    const { data, loading, error } = useQuery(ME)
+  console.log(user)
 
     return (
         <div className = "container">
-            <div>
-                {data && (
-                    <div>
-                        <h1> Name: {data.user.name} </h1>
-                    </div>
-                )}
-            </div>
+           {user &&(
+             <h1> Name: {user.name} </h1>
+           )}
         </div>
     )
 }
