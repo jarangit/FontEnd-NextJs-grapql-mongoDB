@@ -1,57 +1,39 @@
-// import React from 'react'
-// import { useQuery } from "@apollo/react-hooks"
-// import gql from "graphql-tag"
-// import styled from 'styled-components'
-// import Link from 'next/link'
-
-// const BoxPro = styled.div`
-//   display: flex;
-//   flex-wrap: wrap;
-//   div{
-//     border: 1px solid;
-//     margin: 10px;
-//     padding: 10px;
-//   }
-// `
+import React, { useContext } from 'react'
+import { useQuery } from "@apollo/react-hooks"
+import gql from "graphql-tag"
 
 
-// export const QUERY_PRODUCTS = gql`
-//   query {
-//     products {
-//       name  
-//       id
-//       description
-//       price
-//       imageUrl
-//     }
-//   }
-// `
-// const ShowAllProduct = () => {
-//     const { data, loading, error } = useQuery(QUERY_PRODUCTS)
+export const ME = gql`
+  query ME {
+    user {
+      id
+      name
+      email
+      products {
+        id
+        description
+        imageUrl
+        price
+      }
+    }
+  }
+`
 
-//   if (error) return <p>Ooobs...something went wrong, please try again later.</p>
+const UserData = () => {
 
-//   if (loading) return <p>Loading...</p>
-//     console.log(data)
-//     return (
-//         <div className = "container">
-//             <h1 style = { {textAlign: "center"} } > PRODUCT </h1>
-//             <BoxPro>
-//             {data.products.map(items => {
-//                 return(
-//                     <div key = {items.id} >
-//                         <img src = {items.imageUrl} width = "100" /> 
-//                         <Link  href = "/products/[prodoctID]" as = {`/products/${items.id}`}>
-//                           <a > <h3>{items.name}</h3> </a>
-//                         </Link>
-//                         <p>{items.price}</p>
-//                           <button> Add to cart </button>
-//                     </div>
-//                 )
-//             })}
-//           </BoxPro>
-//         </div>
-//     )
-// }
+    const { data, loading, error } = useQuery(ME)
 
-// export default ShowAllProduct
+    return (
+        <div className = "container">
+            <div>
+                {data && (
+                    <div>
+                        <h1> Name: {data.user.name} </h1>
+                    </div>
+                )}
+            </div>
+        </div>
+    )
+}
+
+export default UserData

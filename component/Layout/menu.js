@@ -2,6 +2,7 @@ import Link from 'next/link'
 import React, { useContext } from 'react'
 import { AuthContext } from '../../appState/authProvider'
 import styled from 'styled-components'
+import Router from 'next/router'
 
 const ButLogout = styled.button`
     background: none;
@@ -81,12 +82,12 @@ const Menu = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link href = "/manageProduct" >
-                            <a> Your product </a>
-                        </Link>
+                        <a href = "/manageProduct" >
+                             Your product 
+                        </a>
                     </li>
                     <li className = "email-user">
-                        <Link href = "/user/[userID]" as = {`/user/${user.id}`} >
+                        <Link href = "/user/[userID]" as = {`/user/${user.id}`} replace >
                             <a> {user.email} </a>
                         </Link>
                     </li>

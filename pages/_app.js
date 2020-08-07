@@ -58,7 +58,7 @@ MyApp.getInitialProps = async ({ ctx, router }) => {
   const token = cookies && cookies.jwt
 
   if ( !token ) {
-    if ( router.pathname === '/cart' || router.pathname === '/manageProduct' || router.pathname === '/user/*'){
+    if ( router.pathname === '/cart' || router.pathname === '/manageProduct' || router.pathname === `/user`){
       ctx.res.writeHead(302, { Location: "register/signIn" })
       ctx.res.end()
     }
@@ -80,7 +80,7 @@ MyApp.getInitialProps = async ({ ctx, router }) => {
     console.log(result)
     return { user: result.data.user }
   } else {
-    if ( router.pathname === '/cart' || router.pathname === '/manageProduct' || router.pathname === '/user/*'){
+    if ( router.pathname === '/cart' || router.pathname === '/manageProduct' || router.pathname === `/user`){
       ctx.res.writeHead(302, { Location: "register/signIn" })
       ctx.res.end()
     }

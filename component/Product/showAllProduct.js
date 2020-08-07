@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useQuery } from "@apollo/react-hooks"
 import gql from "graphql-tag"
 import styled from 'styled-components'
 import Link from 'next/link'
+import {AuthContext} from '../../appState/authProvider'
+import Router from 'next/router'
 
 const BoxPro = styled.div`
   display: flex;
@@ -23,11 +25,17 @@ export const QUERY_PRODUCTS = gql`
       description
       price
       imageUrl
+      user{
+        id
+      }
     }
   }
 `
 const ShowAllProduct = () => {
     const { data, loading, error } = useQuery(QUERY_PRODUCTS)
+
+    const { user } = useContext(AuthContext)
+    console.log(user)
 
   if (error) return <p>Ooobs...something went wrong, please try again later.</p>
 
@@ -45,7 +53,11 @@ const ShowAllProduct = () => {
                           <a > <h3>{items.name}</h3> </a>
                         </Link>
                         <p>{items.price}</p>
-                          <button> Add to cart </button>
+                          {user && user.id === items.user.id ?(
+                            <button onClick = {() => Router.push('/manageProduct')} > Your Product </button>
+                            ):(
+                              <button > Add to cart </button>
+                          )}
                     </div>
                 )
             })}
