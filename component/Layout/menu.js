@@ -25,7 +25,7 @@ const MenuSyt = styled.div`
     height: 100px;
     align-items: center;
     h1 {
-        color: #72ffd4;
+        color: white;
     }
     a {
         color: white;

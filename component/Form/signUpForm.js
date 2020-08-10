@@ -10,6 +10,46 @@ const FormSty = styled.form`
     margin: 0 auto;
     /* align-items: center; */
 `
+
+const LoginSty = styled.div`
+    display: flex;
+    width: 100%;
+    #jr-from-login{
+        width: 50%;
+        form{
+            padding: 20px;
+            margin: 100px auto;
+            width: 500px;
+            border-radius: 1em;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            h2{
+                text-align: center;
+            }
+            input{
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+                height: 35px;
+                width: 100%;
+            }
+            button{
+                color: white;
+                background: black;
+                border-color: black;
+                padding: 5px;
+                margin: 10px 0;
+                width: 50%;
+
+            }
+        }
+    }
+    #jr-banner-login{
+        width: 50%;
+        img{
+            width: 100%;
+        }
+    }
+`
 //END STY
 
 
@@ -69,30 +109,40 @@ const SignUpForm = () => {
 
     //VIEW
     return (
-        <div>
-            <FormSty onSubmit={handleSubmit}>
-                <h3>Sign up</h3>
-                <input type = "text" name = "name" placeholder = "Username" onChange = {handleChange} value = { userInfo.name }/>
-                <input type = "text" name = "email" placeholder = "Email"  onChange = {handleChange} value = { userInfo.email } />
-                <input type = "password" name = "password" placeholder = "Password"  onChange = {handleChange} value = { userInfo.password } />
-                <button type = "submit"> Sign Up </button>
+        <LoginSty>
+            <div id = "jr-from-login" >
+                <form onSubmit={handleSubmit}>
+                        <h2>Sign up</h2>
+                        <label> Username </label>
+                        <input type = "text" name = "name" placeholder = "Username" onChange = {handleChange} value = { userInfo.name }/>
 
-                <div style={{color: "green"}}>
-                    {success && (
-                        <p>
-                            You successfully signed up, please{" "}
-                            <Link href="/register/signIn">
-                            <a>sign in</a>
-                            </Link>
-                            .
-                        </p>
-                    )}
-                    {error && (
-                    <p style={{ color: "red" }}>{error.graphQLErrors[0].message}</p>
-                    )}
-                </div>
-            </FormSty>
-        </div>
+                        <label> Email </label>
+                        <input type = "text" name = "email" placeholder = "Email"  onChange = {handleChange} value = { userInfo.email } />
+
+                        <label> Password </label>
+                        <input type = "password" name = "password" placeholder = "Password"  onChange = {handleChange} value = { userInfo.password } />
+                        <button type = "submit"> Sign Up </button>
+
+                        <div style={{color: "green"}}>
+                            {success && (
+                                <p>
+                                    You successfully signed up, please{" "}
+                                    <Link href="/register/signIn">
+                                    <a>sign in</a>
+                                    </Link>
+                                    .
+                                </p>
+                            )}
+                            {error && (
+                            <p style={{ color: "red" }}>{error.graphQLErrors[0].message}</p>
+                            )}
+                        </div>
+                </form>
+            </div>
+            <div id = 'jr-banner-login'>
+                <img src="https://res.cloudinary.com/the-guitar-next/image/upload/v1597081618/the-guitar-next/pgvllapjmrh7emlmf8se.png" />
+            </div>
+        </LoginSty>
 
     )
 }
