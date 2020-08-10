@@ -18,6 +18,9 @@ const QUERY_USER = {
         email
         products {
           id
+          name
+          price
+          description
         }
         carts {
           id
