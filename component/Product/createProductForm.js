@@ -47,6 +47,7 @@ const CreateProductForm = () => {
 
     const [success, setSuccess] = useState('')
     const [file, setFiles] = useState(null)
+    
     const [createProduct, { loading, error }] = useMutation (CREATE_PRODUCT, {
         refetchQueries: [{ query: QUERY_PRODUCTS }]
     })
