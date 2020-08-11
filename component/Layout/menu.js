@@ -77,9 +77,7 @@ const Menu = () => {
                 {user && (
                    <>
                     <li>
-                        <Link href = "/cart" >
-                            <a> Cart </a>
-                        </Link>
+                        <a href = "/cart"> Cart </a>
                     </li>
                     <li>
                         <a href = "/manageProduct" >
