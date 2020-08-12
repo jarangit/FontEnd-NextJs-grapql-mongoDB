@@ -149,12 +149,12 @@ const UserProductItems = ({products}) => {
       }
     }, [data])
 
-    console.log(products)
+    console.log(products.imageUrl)
     return (
         <div>
             {!edit ? (
                 <div>
-                    <img src = {productData.imageUrl} width = "100"/>
+                    <img src = {products.imageUrl} width = "100"/>
                     <p> Name: { productData.name } </p>
                     <p> Price: { productData.price } </p> 
                     <p> Description: { productData.description } </p>

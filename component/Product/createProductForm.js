@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import styled from 'styled-components'
 import { useMutation } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { QUERY_PRODUCTS } from './showAllProduct'
 import fetch from 'isomorphic-unfetch'
+import { useQuery } from '@apollo/react-hooks'
+import { ME } from '../User/userProducts'
+import { AuthContext } from '../../appState/authProvider'
 
 
 
@@ -37,6 +40,8 @@ const CREATE_PRODUCT = gql`
 
 
 const CreateProductForm = () => {
+    const { user, setAuthUser } = useContext(AuthContext)
+    const { data } = useQuery(ME)
     //https://api.cloudinary.com/v1_1/the-guitar-next/image/upload
     const [productData, setProductData] = useState({
         name: '',
@@ -109,6 +114,14 @@ const CreateProductForm = () => {
             console.log(error)
         }
     }
+
+
+    useEffect(() => {
+        if (data) {
+          setAuthUser(data.user)
+        }
+      }, [data])
+
     console.log(productData)
     return (
         <div className = "container">

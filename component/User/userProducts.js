@@ -34,7 +34,7 @@ const UserProducts = () => {
 
     const { data, loading, error } = useQuery(ME)
     const { user, setAuthUser } = useContext(AuthContext)
-
+    console.log(user)
     useEffect(() => {
       if (data) {
         setAuthUser(data.user)
@@ -45,8 +45,8 @@ const UserProducts = () => {
     return (
         <div className = "container" >
           <h1> Your Product </h1>
-            { data && 
-                data.user.products.map(items => (
+            { user && 
+                user.products.map(items => (
                     <UserProductItems  key = {items.id} products = {items} />
                 ))
             }
