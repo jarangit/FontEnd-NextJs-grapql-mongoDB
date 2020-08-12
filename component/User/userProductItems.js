@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useMutation } from '@apollo/react-hooks'
 import fetch from 'isomorphic-unfetch'
 import gql from 'graphql-tag'
 import { QUERY_PRODUCTS } from '../Product/showAllProduct'
 import { ME } from './userProducts'
+import { useQuery } from '@apollo/react-hooks'
+import { AuthContext } from '../../appState/authProvider'
+
 
 const UPDATE_PRODUCT = gql`
   mutation UPDATE_PRODUCT(
@@ -29,13 +32,23 @@ const UPDATE_PRODUCT = gql`
   }
 `
 
-
+const DELETE_PRODUCT = gql`
+  mutation DELETE_PRODUCT($id: ID!){
+    deleteProduct(
+      id: $id
+    ){
+      id
+    }
+  }
+`
 
 const UserProductItems = ({products}) => {
 
     const [edit, setEdit] = useState(false)
     const [file, setFile] = useState(null)
     const [productData, setProductData] = useState(products)
+    const { user, setAuthUser } = useContext(AuthContext)
+    const { data } = useQuery(ME)
 
     const [updateProduct, { loading, error }] = useMutation (UPDATE_PRODUCT, {
       onCompleted: data => {
@@ -116,6 +129,27 @@ const UserProductItems = ({products}) => {
       setEdit(!edit)
     }
   
+    //Del Pro
+
+    const [deleteProduct] = useMutation (DELETE_PRODUCT, {
+      onCompleted: data => {
+          console.log(data)
+      },
+      refetchQueries: [{ query: ME, }]
+    })
+
+    const handelDelPro = async (id) => {
+      console.log(id)
+      await deleteProduct({ variables: { id } })
+    }
+
+    useEffect(() => {
+      if (data) {
+        setAuthUser(data.user)
+      }
+    }, [data])
+
+    console.log(products)
     return (
         <div>
             {!edit ? (
@@ -125,7 +159,7 @@ const UserProductItems = ({products}) => {
                     <p> Price: { productData.price } </p> 
                     <p> Description: { productData.description } </p>
                     <button style = {{ background: 'yellow' }} onClick={ClickEdit} > Edit </button>
-                    <button style = {{ background: 'red' }} > Delete </button>
+                    <button style = {{ background: 'red' }}  onClick = { ()=> handelDelPro(products.id) } > Delete </button>
                 </div>
             ):(
                 <div>

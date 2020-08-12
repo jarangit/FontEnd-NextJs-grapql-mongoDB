@@ -1,7 +1,8 @@
-import React from 'react'
+import React,{ useContext, useEffect } from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import UserProductItems from './userProductItems'
+import {AuthContext} from '../../appState/authProvider'
 
 export const ME = gql`
   query ME {
@@ -31,7 +32,15 @@ export const ME = gql`
 `
 const UserProducts = () => {
 
-    const { data, loading, error } = useQuery(ME, {fetchPolicy: "no-cache"})
+    const { data, loading, error } = useQuery(ME)
+    const { user, setAuthUser } = useContext(AuthContext)
+
+    useEffect(() => {
+      if (data) {
+        setAuthUser(data.user)
+      }
+    }, [data])
+
     console.log(data)
     return (
         <div className = "container" >
