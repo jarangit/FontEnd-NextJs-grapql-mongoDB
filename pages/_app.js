@@ -25,6 +25,7 @@ const QUERY_USER = {
         carts {
           id
           product {
+            id
             name
             description
             imageUrl
