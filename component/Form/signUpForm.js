@@ -97,10 +97,15 @@ const SignUpForm = () => {
         })
     }
 
+    let failPass
     const handleSubmit = async e => {
         try{
-            e.preventDefault()
-            await signup()
+            if (e.target.confirmPassword.value === e.target.password.value){
+                e.preventDefault()
+                await signup()
+            } else {
+                alert("รหัสไม่ตรงกัน")
+            } 
         } catch (error) {
             console.log(error)
         }
@@ -121,7 +126,11 @@ const SignUpForm = () => {
 
                         <label> Password </label>
                         <input type = "password" name = "password" placeholder = "Password"  onChange = {handleChange} value = { userInfo.password } />
+
+                        <label>Confirm Password </label>
+                        <input type = "password" name = "confirmPassword" placeholder = "Password"  onChange = {handleChange} />
                         <button type = "submit"> Sign Up </button>
+                        {failPass}
                         <div>
                             <ul>
                                 <li> <a href = 'http://localhost:4444/auth/facebook' > FACEBOOK </a></li>
