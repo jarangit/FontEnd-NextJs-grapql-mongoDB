@@ -14,7 +14,6 @@ const AuthProvider = ({children, userData}) => {
             if ( e.key === 'logout' ) {
                 setUser(null)
                 Router.push("/products")
-                window.history.clear();
             }
         }
 

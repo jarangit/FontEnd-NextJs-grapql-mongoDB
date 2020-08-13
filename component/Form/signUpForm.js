@@ -122,7 +122,12 @@ const SignUpForm = () => {
                         <label> Password </label>
                         <input type = "password" name = "password" placeholder = "Password"  onChange = {handleChange} value = { userInfo.password } />
                         <button type = "submit"> Sign Up </button>
-
+                        <div>
+                            <ul>
+                                <li> <a href = 'http://localhost:4444/auth/facebook' > FACEBOOK </a></li>
+                                <li> <a href = '/' > GOOGLE </a></li>
+                            </ul>
+                        </div>
                         <div style={{color: "green"}}>
                             {success && (
                                 <p>

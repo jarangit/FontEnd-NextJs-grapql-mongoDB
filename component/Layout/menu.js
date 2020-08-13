@@ -65,14 +65,10 @@ const Menu = () => {
             <h1> GUITARNEX </h1>
             <ul>
                 <li>
-                    <Link href = "/" key = "home">
-                        <a> Home </a>
-                    </Link>
+                    <a href = "/" key = "home"> Home </a>
                 </li>
                 <li>
-                    <Link href = "/products" key = "product">
-                        <a> Product </a>
-                    </Link>
+                    <a href = "/products" key = "product"> Product </a>
                 </li>
                 {user && (
                    <>
