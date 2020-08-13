@@ -1,14 +1,12 @@
 import React from 'react'
 import CreateProductForm from '../component/Product/createProductForm'
-import UserProducts from '../component/User/userProducts'
 
-const ManageProduct = () => {
+const CreateProduct = () => {
     return (
         <div>
             <CreateProductForm/>
-            <UserProducts/>
         </div>
     )
 }
 
-export default ManageProduct
+export default CreateProduct

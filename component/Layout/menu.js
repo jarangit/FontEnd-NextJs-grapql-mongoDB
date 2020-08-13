@@ -62,7 +62,7 @@ const Menu = () => {
     console.log(user)
     return(
         <MenuSyt>
-            <h1> THE GUITAR NEXT </h1>
+            <h1> GUITARNEX </h1>
             <ul>
                 <li>
                     <Link href = "/" key = "home">
@@ -80,8 +80,8 @@ const Menu = () => {
                         <a href = "/cart"> Cart </a>
                     </li>
                     <li>
-                        <a href = "/manageProduct" >
-                             Your product 
+                        <a href = "/myproducts" >
+                             My product 
                         </a>
                     </li>
                     <li className = "email-user">

@@ -125,7 +125,6 @@ const CreateProductForm = () => {
     console.log(productData)
     return (
         <div className = "container">
-            <h1> Product Name  </h1>
             <form onSubmit = {handleSubmit} >
                 <div>
                     <strong> Name </strong><input type = "text" placeholder = "Name" name = "name" value = {productData.name} onChange = {handleChange}/>
@@ -144,7 +143,7 @@ const CreateProductForm = () => {
                 disabled={
                     !productData.description || !file || !productData.price || loading
                   }
-                > Update </button>
+                > {loading? ('loading'):('update')}</button>
             </form>
             <strong> {success} </strong>
             <p>https://www.loveyouflower.com/wp-content/uploads/2014/02/A084.jpg</p>

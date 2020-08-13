@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import Link from 'next/link'
 import {AuthContext} from '../../appState/authProvider'
 import styled from 'styled-components'
@@ -6,6 +6,7 @@ import Router from 'next/router'
 import { useMutation } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { ME } from '../User/userProducts'
+import { useQuery } from '@apollo/react-hooks'
 
 
 const ADDTOCART = gql`
@@ -24,7 +25,8 @@ const ADDTOCART = gql`
   }
 `
 const ProductList = ({product}) => {
-    const { user } = useContext(AuthContext)
+  const { user, setAuthUser } = useContext(AuthContext)
+  const { data } = useQuery(ME)
 
     const [addToCart, { loading, error }] = useMutation (ADDTOCART, {
         onCompleted: data => {
@@ -41,17 +43,24 @@ const ProductList = ({product}) => {
         console.log(id)
         await addToCart({ variables: { id } })
       }
-    let buttomy
+      const cartProductId = user && user.carts.map(items => items.product.id)
+      let buttomy
+    console.log(cartProductId);
 
-    if(user && user.id === product.user.id){
-      console.log(user)
-      buttomy = <button onClick = {() => Router.push('/manageProduct')} > Your Product </button> 
-    }else if( user && user.id === product.user.id ){
-      buttomy = <button style = {{background: "yellow"}} onClick = {() => handelAddToCart(product.id)} > Add to cart </button>
+    if( user && cartProductId.includes(product.id) ){
+      buttomy = <button>carted </button>
+    }else if (user && user.id === product.user.id){
+      buttomy = <button onClick = {() => Router.push('/myproducts')} > Your Product </button>
     }else{
-      buttomy = <button style = {{background: "green"}} onClick = {() => handelAddToCart(product.id)} > Add to cart </button>
+      buttomy = <button style = {{background: "green"}} onClick = {() => handelAddToCart(product.id)} > add to cart </button>
     }
-    // console.log(user && user.carts.user.id)
+
+    console.log(user)
+    useEffect(() => {
+      if (data) {
+        setAuthUser(data.user)
+      }
+    }, [data])
     return (
             <div key = {product.id} >
                         <img src = {product.imageUrl} width = "100" /> 

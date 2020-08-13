@@ -149,7 +149,7 @@ const UserProductItems = ({products}) => {
       }
     }, [data])
 
-    console.log(products.imageUrl)
+    console.log(productData)
     return (
         <div>
             {!edit ? (
@@ -163,12 +163,12 @@ const UserProductItems = ({products}) => {
                 </div>
             ):(
                 <div>
-                    <img src = {productData.imageUrl} width = "100"/> <input type = "file" placeholder = "Image-URL" name = "file"  onChange = {selectFile}/>
+                    <img src = {products.imageUrl} width = "100"/> <input type = "file" placeholder = "Image-URL" name = "file"  onChange = {selectFile}/>
                     <p> Name: <input type = "text" name = "name" value = {productData.name} onChange = {handelChange} ></input> </p>
                     <p> Price: <input type = "number" name = "price" value = {productData.price} onChange = {handelChange} ></input> </p>
                     <p> Description: <input type = "text" name = "description" value = {productData.description}  onChange = {handelChange} ></input> </p>
                     <button style = {{ background: 'red' }} onClick={ClickEdit} > Cancel </button>
-                    <button style = {{ background: 'green' }} onClick = {handleSubmit}  > Confirm </button>
+                    <button style = {{ background: 'green' }} onClick = {handleSubmit}  > {loading ? ('Loading'):("Confirm")}   </button>
                 </div>
             )} 
             
