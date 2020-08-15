@@ -71,7 +71,7 @@ MyApp.getInitialProps = async ({ ctx, router }) => {
   }
 
 
-  const response = await fetch("http://api-guitarnex.abk-store.com/graphql", {
+  const response = await fetch("https://api-guitarnex.abk-store.com/graphql", {
     method: 'post',
     headers: {
       'Content-Type': 'application/json',
