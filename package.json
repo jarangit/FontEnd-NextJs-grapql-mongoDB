@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "export": "next export",
+    "deploy": "npm run build && npm run export"
   },
   "dependencies": {
     "@apollo/react-hooks": "^4.0.0",
@@ -20,8 +22,12 @@
     "js-cookie": "^2.2.1",
     "next": "9.5.1",
     "next-with-apollo": "^5.1.0",
+    "node-fetch": "^2.6.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "styled-components": "^5.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.7.0"
   }
 }

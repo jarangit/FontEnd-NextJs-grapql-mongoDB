@@ -7,7 +7,7 @@ import withApollo from "next-with-apollo"
 import { ApolloProvider } from "@apollo/react-hooks"
 import cookie from "cookie"
 
-const uri = "http://localhost:4444/graphql"
+const uri = "http://api-guitarnex.abk-store.com/graphql"
 
 const httpLink = createHttpLink({ uri, fetch })
 
