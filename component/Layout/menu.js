@@ -73,7 +73,7 @@ const Menu = () => {
                 {user && (
                    <>
                     <li>
-                        <a href = "/cart"> Cart </a>
+                        <a href = "/cart_items"> Cart </a>
                     </li>
                     <li>
                         <a href = "/myproducts" >
