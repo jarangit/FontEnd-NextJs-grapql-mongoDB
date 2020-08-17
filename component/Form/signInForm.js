@@ -85,7 +85,7 @@ const SignInForm = () => {
     const handleChange = e => {
         setUserInfo({
             ...userInfo,
-            [e.target.name]: e.target.value,
+            [e.target.name]: e.target.value.toLowerCase(),
         })
     }
 
