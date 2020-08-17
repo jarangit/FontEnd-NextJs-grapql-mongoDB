@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import Router from 'next/router'
 import UserCartItem from '../component/Cart/userCartItem'
 
-const Cart = () => {
+const Cart_Item = () => {
  
     
     return (
@@ -13,4 +13,4 @@ const Cart = () => {
     )
 }
 
-export default Cart
+export default Cart_Item
