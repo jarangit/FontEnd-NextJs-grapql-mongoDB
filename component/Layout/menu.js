@@ -17,7 +17,7 @@ const ButLogout = styled.button`
 `
 
 const MenuSyt = styled.div`
-    background: red;
+    background: black;
     color: white;
     display: flex;
     flex-wrap: wrap;
@@ -62,7 +62,7 @@ const Menu = () => {
     console.log(user)
     return(
         <MenuSyt>
-            <h1> GUITARNEX </h1>
+            <h1> GUITAR NEXT <span style  ={{ color: 'red', fontSize: "20px" }} > [Develop] </span> </h1>
             <ul>
                 <li>
                     <a href = "/" key = "home"> Home </a>

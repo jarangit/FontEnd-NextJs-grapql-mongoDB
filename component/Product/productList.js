@@ -45,7 +45,6 @@ const ProductList = ({product}) => {
       }
       const cartProductId = user && user.carts.map(items => items.product.id)
       let buttomy
-    console.log(cartProductId);
 
     if( user && cartProductId.includes(product.id) ){
       buttomy = <button>carted </button>
@@ -55,15 +54,16 @@ const ProductList = ({product}) => {
       buttomy = <button style = {{background: "green"}} onClick = {() => handelAddToCart(product.id)} > add to cart </button>
     }
 
-    console.log(user)
     useEffect(() => {
       if (data) {
         setAuthUser(data.user)
       }
     }, [data])
+
+
     return (
             <div key = {product.id} >
-                        <img src = {product.imageUrl} width = "100" /> 
+                        <img src = {product.imageUrl} width = "300" /> 
                         <Link  href = "/products/[prodoctID]" as = {`/products/${product.id}`}>
                           <a > <h3>{product.name}</h3> </a>
                         </Link>
