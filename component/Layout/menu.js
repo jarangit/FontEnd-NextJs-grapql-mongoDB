@@ -17,7 +17,7 @@ const ButLogout = styled.button`
 `
 
 const MenuSyt = styled.div`
-    background: black;
+    background: red;
     color: white;
     display: flex;
     flex-wrap: wrap;
