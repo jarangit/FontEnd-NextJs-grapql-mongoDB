@@ -28,6 +28,7 @@ const QUERY_PRODUCT = gql`
                 id
                 name
                 opVal
+                parentName
             }
         }
     }
@@ -78,7 +79,7 @@ const Products = () => {
                     console.log(items)
                     return(
                         <div>
-                            <p>{ items.name }</p>
+                            <p> <strong> {items.parentName}: </strong> { items.name }</p>
                         </div>
                     )
                 })}
