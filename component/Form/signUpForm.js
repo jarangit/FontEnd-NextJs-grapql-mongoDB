@@ -56,11 +56,23 @@ const LoginSty = styled.div`
 //DATA
 
 const SIGN_UP = gql`
-    mutation SIGN_UP ($name: String!, $email: String!, $password: String!) {
-        signup ( name: $name, email: $email, password: $password ) { 
-            name
-            email	
-        }
+    mutation SIGN_UP (
+        $name: String!,
+        $username: String!, 
+        $email: String!, 
+        $password: String!
+        ) {
+        signup(
+            username: $username
+            name: $name
+            email: $email
+            password: $password
+            ) {
+                id
+                name
+                email
+                username
+            }
     }
 `
 
@@ -70,6 +82,7 @@ const SignUpForm = () => {
 
     const [userInfo, setUserInfo] = useState({
         name: "",
+        username: "",
         email: "",
         password: ""
     })
@@ -82,8 +95,9 @@ const SignUpForm = () => {
                 console.log(data)
                 setSuccess(true)
                 setUserInfo({
-                    name: " ",
-                    email: " ",
+                    username: "",
+                    name: "",
+                    email: "",
                     password: " "
                 })
             }
@@ -119,7 +133,10 @@ const SignUpForm = () => {
                 <form onSubmit={handleSubmit}>
                         <h2>Sign up</h2>
                         <label> Username </label>
-                        <input type = "text" name = "name" placeholder = "Username" onChange = {handleChange} value = { userInfo.name }/>
+                        <input type = "text" name = "username" placeholder = "Username" onChange = {handleChange} value = { userInfo.username }/>
+
+                        <label> name </label>
+                        <input type = "text" name = "name" placeholder = "name" onChange = {handleChange} value = { userInfo.name }/>
 
                         <label> Email </label>
                         <input type = "text" name = "email" placeholder = "Email"  onChange = {handleChange} value = { userInfo.email } />

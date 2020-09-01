@@ -10,6 +10,10 @@ export const ME = gql`
       id
       name
       email
+      address
+      tel
+      line_id
+      image_profile
       products {
         id
         name

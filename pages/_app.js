@@ -9,13 +9,17 @@ import { Router } from 'next/router'
 
 
 
-const QUERY_USER = {
+export const QUERY_USER = {
   query:`
     query {
       user {
         id
         name
         email
+        address
+        tel
+        line_id
+        image_profile
         products {
           id
           name

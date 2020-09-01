@@ -27,7 +27,11 @@ const LOG_IN = gql`
                 id
                 name
                 email
-                products {
+                address
+                tel
+                line_id
+                image_profile
+                    products {
                     id
                     name
                     price

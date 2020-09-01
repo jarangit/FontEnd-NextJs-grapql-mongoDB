@@ -20,20 +20,31 @@ const CREATE_PRODUCT = gql`
   mutation CREATE_PRODUCT(
     $name: String!
     $description: String!
-    $imageUrl: String!
+    $address: String!
+    $reason_sell: String
+    $shipping: String!
     $price: Float!
+    $pd_life: Float!
+    $integrity: Float!
+    $imageUrl: String
+    $productCategory: String!
+    $pd_options_attr: [String]
   ) {
     createProduct(
-      name: $name
-      description: $description
-      imageUrl: $imageUrl
-      price: $price
-    ) {
-      name
-      id
-      description
-      price
-      imageUrl
+        name:$name
+        description: $description
+        price: $price
+        address: $address
+        imageUrl: $imageUrl
+        pd_options_attr: $pd_options_attr
+        shipping: $shipping
+        pd_life: $pd_life
+        integrity: $integrity
+        productCategory: $productCategory
+        reason_sell: $reason_sell
+    ){
+        id
+        name
     }
   }
 `
@@ -44,10 +55,17 @@ const CreateProductForm = () => {
     const { data } = useQuery(ME)
     //https://api.cloudinary.com/v1_1/the-guitar-next/image/upload
     const [productData, setProductData] = useState({
-        name: '',
-        description: '',
-        imageUrl: '',
-        price: ''
+        name: "",
+        description: "",
+        imageUrl: "",
+        price: "",
+        address: "",
+        pd_options_attr: "",
+        shipping: "",
+        pd_life: "",
+        integrity: "",
+        productCategory: "",
+        reason_sell: ""
       })
 
     const [success, setSuccess] = useState('')
@@ -91,12 +109,16 @@ const CreateProductForm = () => {
         try{
             e.preventDefault()
             console.log(productData)
-            const urlImg = await UploadFiles()
+            // const urlImg = await UploadFiles()
+            const urlImg = "https://res.cloudinary.com/the-guitar-next/image/upload/v1598983747/the-guitar-next/uxzu7fbvladtszcvvdcm.jpg"
+            console.log(urlImg)
             if (urlImg) {
                 const result = await createProduct({
                     variables: { 
                         ...productData, 
                         price: +productData.price,
+                        pd_life: +productData.pd_life,
+                        integrity: +productData.integrity,
                         imageUrl: urlImg
                     }
                 })
@@ -108,7 +130,14 @@ const CreateProductForm = () => {
                 name: '',
                 description: '',
                 imageUrl: '',
-                price: ''
+                price: '',
+                address: '',
+                pd_options_attr: '',
+                shipping: '',
+                pd_life: '',
+                integrity: '',
+                productCategory: '',
+                reason_sell: ''
               })
         } catch (error) {
             console.log(error)
@@ -136,13 +165,31 @@ const CreateProductForm = () => {
                     <strong> Price </strong><input type = "number" placeholder = "Price" name = "price" value = {productData.price} onChange = {handleChange}/>
                 </div>
                 <div>
-                    <strong> Image </strong><input type = "file" placeholder = "Image-URL" name = "file" onChange = {SelectFiles}/>
+                    <strong> Address </strong><input type = "text" placeholder = "ที่อยู่" name = "address" value = {productData.address} onChange = {handleChange}/>
                 </div>
+                <div>
+                    <strong> ProductCategory </strong><input type = "text" placeholder = "หมวดหมู่" name = "productCategory" value = {productData.productCategory} onChange = {handleChange}/>
+                </div>
+                <div>
+                    <strong> คุณสมบัตร </strong><input type = "text" placeholder = "คุณสมบัตร" name = "pd_options_attr" value = {productData.pd_options_attr} onChange = {handleChange}/>
+                </div>
+                <div>
+                    <strong> การจัดส่ง </strong><input type = "text" placeholder = "การจัดส่ง" name = "shipping" value = {productData.shipping} onChange = {handleChange}/>
+                </div>
+                <div>
+                    <strong> อายุการใช้งาน </strong><input type = "number" placeholder = "อายุการใช้งาน" name = "pd_life" value = {productData.pd_life} onChange = {handleChange}/>
+                </div>
+                <div>
+                    <strong> สภาพสินค้า </strong><input type = "number" placeholder = "สภาพสินค้า" name = "integrity" value = {productData.integrity} onChange = {handleChange}/>
+                </div>
+                {/* <div>
+                    <strong> Image </strong><input type = "file" placeholder = "Image-URL" name = "file" onChange = {SelectFiles}/>
+                </div> */}
                 <button 
                 type = "submit" 
-                disabled={
-                    !productData.description || !file || !productData.price || loading
-                  }
+                // disabled={
+                //     !productData.description || !file || !productData.price || loading
+                //   }
                 > {loading? ('loading'):('update')}</button>
             </form>
             <strong> {success} </strong>
