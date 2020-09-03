@@ -8,6 +8,7 @@ export const AuthContext = createContext()
 const AuthProvider = ({children, userData}) => {
 
     const [user, setUser] = useState(userData)
+    const [ID_CatPro_FromC, setID_CatPro_FromC] = useState('')
 
     useEffect(() => {
         const syncLogout = e => {
@@ -37,7 +38,7 @@ const AuthProvider = ({children, userData}) => {
         Router.push('/products')
     }
     return (
-        <AuthContext.Provider value = { { user, setAuthUser, Signout } } > 
+        <AuthContext.Provider value = { { user, setAuthUser, Signout, ID_CatPro_FromC, setID_CatPro_FromC } } > 
             { children }
         </AuthContext.Provider>
     )

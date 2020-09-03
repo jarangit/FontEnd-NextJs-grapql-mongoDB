@@ -7,7 +7,7 @@ import fetch from 'isomorphic-unfetch'
 import { useQuery } from '@apollo/react-hooks'
 import { ME } from '../User/userProducts'
 import { AuthContext } from '../../appState/authProvider'
-
+import CreateProductFrom_selectCatID from './createProductFrom_selectCatID'
 
 
 const FormSty = styled.form`
@@ -52,6 +52,8 @@ const CREATE_PRODUCT = gql`
 
 const CreateProductForm = () => {
     const { user, setAuthUser } = useContext(AuthContext)
+    const { ID_CatPro_FromC, setID_CatPro_FromC } = useContext(AuthContext)
+
     const { data } = useQuery(ME)
     //https://api.cloudinary.com/v1_1/the-guitar-next/image/upload
     const [productData, setProductData] = useState({
@@ -60,14 +62,13 @@ const CreateProductForm = () => {
         imageUrl: "",
         price: "",
         address: "",
-        pd_options_attr: "",
+        pd_options_attr: ["5f4742caec1d694a94761dea", "5f46b486d4ccfd2c5466edad"],
         shipping: "",
         pd_life: "",
         integrity: "",
-        productCategory: "",
+        productCategory: ID_CatPro_FromC,
         reason_sell: ""
       })
-
     const [success, setSuccess] = useState('')
     const [file, setFiles] = useState(null)
     
@@ -119,7 +120,8 @@ const CreateProductForm = () => {
                         price: +productData.price,
                         pd_life: +productData.pd_life,
                         integrity: +productData.integrity,
-                        imageUrl: urlImg
+                        imageUrl: urlImg,
+                        productCategory: ID_CatPro_FromC
                     }
                 })
                 console.log(result)
@@ -168,7 +170,9 @@ const CreateProductForm = () => {
                     <strong> Address </strong><input type = "text" placeholder = "ที่อยู่" name = "address" value = {productData.address} onChange = {handleChange}/>
                 </div>
                 <div>
-                    <strong> ProductCategory </strong><input type = "text" placeholder = "หมวดหมู่" name = "productCategory" value = {productData.productCategory} onChange = {handleChange}/>
+                    {/* <strong> ProductCategory </strong><input type = "text" placeholder = "หมวดหมู่" name = "productCategory" value = {productData.productCategory} onChange = {handleChange}/> */}
+                    <strong>ProductCategory</strong>
+                    <CreateProductFrom_selectCatID/>
                 </div>
                 <div>
                     <strong> คุณสมบัตร </strong><input type = "text" placeholder = "คุณสมบัตร" name = "pd_options_attr" value = {productData.pd_options_attr} onChange = {handleChange}/>
