@@ -26,22 +26,22 @@ const CREATE_PRODUCT = gql`
     $price: Float!
     $pd_life: Float!
     $integrity: Float!
-    $imageUrl: String
+    $imageUrl: String!
     $productCategory: String!
     $pd_options_attr: [String]
   ) {
     createProduct(
-        name:$name
+        name: $name
         description: $description
-        price: $price
         address: $address
-        imageUrl: $imageUrl
-        pd_options_attr: $pd_options_attr
+        reason_sell: $reason_sell
         shipping: $shipping
+        price: $price
         pd_life: $pd_life
         integrity: $integrity
+        imageUrl: $imageUrl
         productCategory: $productCategory
-        reason_sell: $reason_sell
+        pd_options_attr: $pd_options_attr
     ){
         id
         name
