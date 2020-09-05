@@ -7,8 +7,9 @@ import fetch from 'isomorphic-unfetch'
 import { useQuery } from '@apollo/react-hooks'
 import { ME } from '../User/userProducts'
 import { AuthContext } from '../../appState/authProvider'
-import CreateProductFrom_selectCatID from './createProductFrom_selectCatID'
-
+import C_ProForm_SELECTID_CAT from './createProductFrom_selectCatID'
+import C_ProForm_SELECTID_ATT from './createProductFrom_selectAtt'
+import Router from 'next/router'
 
 const FormSty = styled.form`
     display: inline-block;
@@ -22,7 +23,7 @@ const CREATE_PRODUCT = gql`
     $description: String!
     $address: String!
     $reason_sell: String
-    $shipping: String!
+    $shipping: [String]!
     $price: Float!
     $pd_life: Float!
     $integrity: Float!
@@ -53,6 +54,8 @@ const CREATE_PRODUCT = gql`
 const CreateProductForm = () => {
     const { user, setAuthUser } = useContext(AuthContext)
     const { ID_CatPro_FromC, setID_CatPro_FromC } = useContext(AuthContext)
+    const { ID_ATTPro_FromC, setID_ATTPro_FromC } = useContext(AuthContext)
+    const [IDShipping, setIDShipping] = useState([])
 
     const { data } = useQuery(ME)
     //https://api.cloudinary.com/v1_1/the-guitar-next/image/upload
@@ -62,8 +65,8 @@ const CreateProductForm = () => {
         imageUrl: "",
         price: "",
         address: "",
-        pd_options_attr: ["5f4742caec1d694a94761dea", "5f46b486d4ccfd2c5466edad"],
-        shipping: "",
+        pd_options_attr: ID_ATTPro_FromC,
+        shipping: IDShipping,
         pd_life: "",
         integrity: "",
         productCategory: ID_CatPro_FromC,
@@ -121,7 +124,9 @@ const CreateProductForm = () => {
                         pd_life: +productData.pd_life,
                         integrity: +productData.integrity,
                         imageUrl: urlImg,
-                        productCategory: ID_CatPro_FromC
+                        productCategory: ID_CatPro_FromC,
+                        pd_options_attr: ID_ATTPro_FromC,
+                        shipping: IDShipping
                     }
                 })
                 console.log(result)
@@ -141,11 +146,30 @@ const CreateProductForm = () => {
                 productCategory: '',
                 reason_sell: ''
               })
+              setID_ATTPro_FromC([])
+              setID_CatPro_FromC('')
+              document.getElementById("Sel_Pro_Att").reset();
+
+
         } catch (error) {
             console.log(error)
         }
     }
 
+    const GetID_Shipping = () => {
+        const findIdAtt =  IDShipping.find(e => e === event.target.id)
+        console.log(findIdAtt)
+       if(findIdAtt){
+        setIDShipping(IDShipping.filter((e)=>(e !== event.target.id)))
+
+       }else {
+           let idAAtt = event.target.id
+           setIDShipping(id => [...id, `${idAAtt}`])
+       }
+        console.log(IDShipping)
+       
+
+    }
 
     useEffect(() => {
         if (data) {
@@ -153,7 +177,7 @@ const CreateProductForm = () => {
         }
       }, [data])
 
-    console.log(productData)
+    // console.log(productData)
     return (
         <div className = "container">
             <form onSubmit = {handleSubmit} >
@@ -171,14 +195,19 @@ const CreateProductForm = () => {
                 </div>
                 <div>
                     {/* <strong> ProductCategory </strong><input type = "text" placeholder = "หมวดหมู่" name = "productCategory" value = {productData.productCategory} onChange = {handleChange}/> */}
-                    <strong>ProductCategory</strong>
-                    <CreateProductFrom_selectCatID/>
+                    <C_ProForm_SELECTID_CAT/>
                 </div>
                 <div>
-                    <strong> คุณสมบัตร </strong><input type = "text" placeholder = "คุณสมบัตร" name = "pd_options_attr" value = {productData.pd_options_attr} onChange = {handleChange}/>
+                    <C_ProForm_SELECTID_ATT />
                 </div>
                 <div>
                     <strong> การจัดส่ง </strong><input type = "text" placeholder = "การจัดส่ง" name = "shipping" value = {productData.shipping} onChange = {handleChange}/>
+                    <form>
+                        <input id = 'UTU'type = 'checkbox' onClick = {GetID_Shipping}/>
+                        <label> นัดรับสินค้า </label>
+                        <input id = "MESS" type = 'checkbox' onClick = {GetID_Shipping}/>
+                        <label> จัดส่งสินค้าโดยระบบขนส่ง </label>
+                    </form>
                 </div>
                 <div>
                     <strong> อายุการใช้งาน </strong><input type = "number" placeholder = "อายุการใช้งาน" name = "pd_life" value = {productData.pd_life} onChange = {handleChange}/>

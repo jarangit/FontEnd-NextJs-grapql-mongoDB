@@ -13,12 +13,10 @@ export const QUERY_PRODUCTS_CAT = gql`
         }
     }
 `
-const CreateProductFrom_selectCatID = () => {
+const C_ProForm_SELECTID_CAT = () => {
     const { data, loading, error } = useQuery(QUERY_PRODUCTS_CAT)
     const { ID_CatPro_FromC, setID_CatPro_FromC } = useContext(AuthContext)
     const [Click_SEL, setClick_SEL] = useState(false)
-    console.log(ID_CatPro_FromC)
-
 
     const GetID =() => {
         let selector = document.getElementById('CAT_SELECT_ID');
@@ -31,6 +29,7 @@ const CreateProductFrom_selectCatID = () => {
     }
     return (
         <div>
+            <strong>เลือกหมวดหมู่สินค้า</strong>
             {data && (
                 <select id = "CAT_SELECT_ID"onChange = {GetID} onClick = {SetSelect}>
                     {data.productCategories.map(items => {
@@ -45,4 +44,4 @@ const CreateProductFrom_selectCatID = () => {
     )
 }
 
-export default CreateProductFrom_selectCatID
+export default C_ProForm_SELECTID_CAT
