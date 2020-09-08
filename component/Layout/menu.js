@@ -76,7 +76,7 @@ const Menu = () => {
                         <a href = "/cart_items"> Cart </a>
                     </li>
                     <li>
-                        <a href = "/myproducts" >
+                        <a href = "/user_products" >
                              My product 
                         </a>
                     </li>

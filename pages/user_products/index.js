@@ -1,5 +1,5 @@
 import React from 'react'
-import UserProducts from '../component/User/userProducts'
+import UserProducts from '../../component/User/userProducts'
 import Link from 'next/link'
 
 const MyProducts = () => {

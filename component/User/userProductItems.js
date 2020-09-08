@@ -6,6 +6,7 @@ import { QUERY_PRODUCTS } from '../Product/showAllProduct'
 import { ME } from './userProducts'
 import { useQuery } from '@apollo/react-hooks'
 import { AuthContext } from '../../appState/authProvider'
+import Link from 'next/link'
 
 
 const UPDATE_PRODUCT = gql`
@@ -13,21 +14,28 @@ const UPDATE_PRODUCT = gql`
     $id: ID!
     $name: String
     $description: String
-    $imageUrl: String
+    $address: String
+    $reason_sell: String
     $price: Float
+    $imageUrl: String
   ) {
     updateProduct(
       id: $id
       name: $name
       description: $description
-      imageUrl: $imageUrl
+      address: $address
+      reason_sell: $reason_sell
       price: $price
+      imageUrl: $imageUrl
     ) {
       id
       name
       description
+      address
+      reason_sell
       price
       imageUrl
+      
     }
   }
 `
@@ -49,13 +57,12 @@ const UserProductItems = ({products}) => {
     const [productData, setProductData] = useState(products)
     const { user, setAuthUser } = useContext(AuthContext)
     const { data } = useQuery(ME)
-
+    console.log(productData)
     const [updateProduct, { loading, error }] = useMutation (UPDATE_PRODUCT, {
       onCompleted: data => {
         ClickEdit()
         console.log(data)
         setProductData(data.updateProduct)
-
       },
       refetchQueries: [{ query: QUERY_PRODUCTS }, { query: ME }]
     })
@@ -155,7 +162,11 @@ const UserProductItems = ({products}) => {
             {!edit ? (
                 <div>
                     <img src = {products.imageUrl} width = "100"/>
-                    <p> Name: { productData.name } </p>
+                    <div>
+                      <Link href = "/user_products/[prodoctID]" as = {`/user_products/${productData.id}`} >
+                        <a>  Name: { productData.name } </a>
+                      </Link>
+                    </div>
                     <p> Price: { productData.price } </p> 
                     <p> Description: { productData.description } </p>
                     <button style = {{ background: 'yellow' }} onClick={ClickEdit} > Edit </button>
