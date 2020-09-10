@@ -236,6 +236,8 @@ const EditProduct = (props) => {
                     </div>
                     <p> สภาพสินค้า: <input type = "number" name = "integrity" value = {productData.integrity}></input> </p>
                     <p> อายุการใช้งาน: <input type = "number" name = "pd_life" value = {productData.pd_life}></input> </p>
+                    <DropDown_ProCat dataCat = {productData.productCategory} />
+                    <CheckBox_ProAtt dataAtt = {productData.pd_options_attr} />
                     <button style = {{ background: 'red' }} onClick={ClickEdit} > Cancel </button>
                     <button type = "submit" style = {{ background: 'green' }}   > {loading ? ('Loading'):("Confirm")}</button>
                   </form>
