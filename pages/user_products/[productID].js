@@ -41,7 +41,6 @@ const UserProducts = () => {
     if (error) return <p>Ooobs...something went wrong, please try again later.</p>
 
     if (loading) return <p>Loading...</p>
-    console.log(data.product)
 
     const {
         id,

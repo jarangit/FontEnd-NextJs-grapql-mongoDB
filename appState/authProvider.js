@@ -8,8 +8,13 @@ export const AuthContext = createContext()
 const AuthProvider = ({children, userData}) => {
 
     const [user, setUser] = useState(userData)
+
     const [ID_CatPro_FromC, setID_CatPro_FromC] = useState('')
     const [ID_ATTPro_FromC, setID_ATTPro_FromC] = useState([])
+
+    const [ID_CatPro_FromEdit, setID_CatPro_FromEdit] = useState('')
+    const [ID_ATTPro_FromEdit, setID_ATTPro_FromEdit] = useState([])
+
 
     useEffect(() => {
         const syncLogout = e => {
@@ -49,7 +54,13 @@ const AuthProvider = ({children, userData}) => {
             setID_CatPro_FromC,
 
             ID_ATTPro_FromC, 
-            setID_ATTPro_FromC
+            setID_ATTPro_FromC,
+
+            ID_ATTPro_FromEdit,
+            setID_ATTPro_FromEdit,
+
+            ID_CatPro_FromEdit,
+            setID_CatPro_FromEdit,
             } } > 
 
             { children }

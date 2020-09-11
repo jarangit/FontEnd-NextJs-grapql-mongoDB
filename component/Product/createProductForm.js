@@ -53,8 +53,7 @@ const CREATE_PRODUCT = gql`
 
 const CreateProductForm = () => {
     const { user, setAuthUser } = useContext(AuthContext)
-    const { ID_CatPro_FromC, setID_CatPro_FromC } = useContext(AuthContext)
-    const { ID_ATTPro_FromC, setID_ATTPro_FromC } = useContext(AuthContext)
+    const { ID_CatPro_FromC, setID_CatPro_FromC,  ID_ATTPro_FromC, setID_ATTPro_FromC} = useContext(AuthContext)
     const [IDShipping, setIDShipping] = useState([])
 
     const { data } = useQuery(ME)

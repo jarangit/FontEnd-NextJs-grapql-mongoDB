@@ -21,6 +21,7 @@ const UPDATE_PRODUCT = gql`
     $imageUrl: String
     $integrity: Float
     $pd_life: Float
+    $pd_options_attr: [String]
   ) {
     updateProduct(
       id: $id
@@ -32,6 +33,7 @@ const UPDATE_PRODUCT = gql`
       imageUrl: $imageUrl
       integrity: $integrity
       pd_life: $pd_life
+      pd_options_attr: $pd_options_attr
     ) {
       id
       name
@@ -48,6 +50,9 @@ const UPDATE_PRODUCT = gql`
 
 
 const EditProduct = (props) => {
+  console.log(props.product)
+  const { user, setAuthUser,  ID_ATTPro_FromEdit, setID_ATTPro_FromEdit} = useContext(AuthContext)
+  const { data } = useQuery(ME)
     const {
         id,
         name, 
@@ -62,13 +67,26 @@ const EditProduct = (props) => {
         productCategory,
         pd_options_attr,
     } = props.product
-
     //----EDIT_PRODUCT----
     const [edit, setEdit] = useState(false)
     const [file, setFile] = useState(null)
-    const [productData, setProductData] = useState(props.product)
-    const { user, setAuthUser } = useContext(AuthContext)
-    const { data } = useQuery(ME)
+    const [productData, setProductData] = useState({
+        id: id,
+        name: name,
+        description: description,
+        price: price, 
+        imageUrl: imageUrl, 
+        address: address ,
+        reason_sell: reason_sell,
+        shipping: shipping,
+        pd_life: pd_life,
+        integrity: integrity,
+        productCategory: productCategory,
+        pd_options_attr: pd_options_attr,
+    })
+  
+    console.log(productData.pd_options_attr)
+    console.log(ID_ATTPro_FromEdit);
 
 
     const [updateProduct, { loading, error }] = useMutation (UPDATE_PRODUCT, {
@@ -115,8 +133,7 @@ const EditProduct = (props) => {
         return  console.log('No change');
       }
   
-      console.log(productData)
-  
+
       try {
         if (file) {
           const url = await uploadFile()
@@ -127,9 +144,10 @@ const EditProduct = (props) => {
               variables: {
                 ...productData,
                 imageUrl: url,
-                price: +productData.price,
+                price: + productData.price,
                 integrity: + productData.integrity,
-                pd_life: + productData.pd_life
+                pd_life: + productData.pd_life,
+                pd_options_attr: ID_ATTPro_FromEdit
               }
             })
           }
@@ -140,13 +158,15 @@ const EditProduct = (props) => {
               imageUrl: productData.imageUrl,
               price: +productData.price,
               integrity: + productData.integrity,
-              pd_life: + productData.pd_life
+              pd_life: + productData.pd_life,
+              pd_options_attr: ID_ATTPro_FromEdit
             }
           })
         }
       } catch (error) {
         console.log(error)
       }
+
     }
 
     const ClickEdit = () =>{
@@ -155,24 +175,12 @@ const EditProduct = (props) => {
     //----END_EDIT_PRODUCT-----
 
     useEffect(() => {
+
       if (data) {
         setAuthUser(data.user)
       }
     }, [data])
 
-    // const findProShipping = productData.shipping.map(items => {
-    //   if(items === "UTU"){
-    //     setUTU(true)
-    //   }else if ( items === "MESS" ){
-    //     setMESS(true)
-    //   }
-    // })
-
-    // productData.shipping.forEach(e => {
-    //   if(e === "UTU"){
-    //     console.log('yesy')
-    //   }
-    // });
 
     //เช็คสินค้าว่าติ้กการจัดส่งยังไง
     let updateData_UTU = false;
@@ -187,7 +195,11 @@ const EditProduct = (props) => {
     const [UTU, setUTU] = useState(updateData_UTU ? true : false)
     const [MESS, setMESS] = useState(updateData_MESS ? true : false)
     //
-
+    useEffect(() => {
+      if (data) {
+        setAuthUser(data.user)
+      }
+    }, [data])
     return (
         <div>
             {!edit ? (
@@ -208,9 +220,9 @@ const EditProduct = (props) => {
 
                     <div>
                         <h3> คุณสมบัติ </h3>
-                        {pd_options_attr.map(items => {
+                        {pd_options_attr.map((items, index)=> {
                             return(
-                                <div>
+                                <div key = {index}>
                                     <p> <strong> {items.parentName}: </strong> { items.name }</p>
                                 </div>
                             )
