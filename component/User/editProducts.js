@@ -74,6 +74,7 @@ const EditProduct = (props) => {
         description, 
         price, 
         imageUrl, 
+        image_gallery,
         address,
         reason_sell,
         shipping,
@@ -225,6 +226,14 @@ const EditProduct = (props) => {
             {!edit ? (
                 <div>
                     <img src = {imageUrl}  alt = {description} width = "150" />
+                    <div>
+                        <h3> รูปสินค้าเพิ่มเติม </h3>
+                        {image_gallery && (
+                            image_gallery.map((items, index) => (
+                                <img src = {items} key =  {index}  width = "100" />
+                            ))
+                        )}
+                    </div>
                     <h1> {name} </h1>
                     <p> รายละเอียด: {description} </p>
                     <p> ราคา: {price} </p>
