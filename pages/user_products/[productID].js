@@ -19,6 +19,7 @@ const QUERY_PRODUCT = gql`
             pd_life
             integrity
             productCategory{
+                id
                 name
             }
             user{

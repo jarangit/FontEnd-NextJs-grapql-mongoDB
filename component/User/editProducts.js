@@ -22,6 +22,8 @@ const UPDATE_PRODUCT = gql`
     $integrity: Float
     $pd_life: Float
     $pd_options_attr: [String]
+    $productCategory: String
+    $shipping: [String]
   ) {
     updateProduct(
       id: $id
@@ -34,6 +36,8 @@ const UPDATE_PRODUCT = gql`
       integrity: $integrity
       pd_life: $pd_life
       pd_options_attr: $pd_options_attr
+      productCategory: $productCategory
+      shipping: $shipping
     ) {
       id
       name
@@ -50,9 +54,20 @@ const UPDATE_PRODUCT = gql`
 
 
 const EditProduct = (props) => {
-  console.log(props.product)
-  const { user, setAuthUser,  ID_ATTPro_FromEdit, setID_ATTPro_FromEdit} = useContext(AuthContext)
+  useEffect(() => {
+    if (data) {
+      setAuthUser(data.user)
+      setIDShipping(shipping)
+    }
+  }, [data])
+ 
+
+
+  const { user, setAuthUser,  ID_ATTPro_FromEdit, setID_ATTPro_FromEdit, ID_CatPro_FromEdit, setID_CatPro_FromEdit} = useContext(AuthContext)
   const { data } = useQuery(ME)
+  const [IDShipping, setIDShipping] = useState([])
+  
+  console.log(ID_CatPro_FromEdit)
     const {
         id,
         name, 
@@ -70,29 +85,14 @@ const EditProduct = (props) => {
     //----EDIT_PRODUCT----
     const [edit, setEdit] = useState(false)
     const [file, setFile] = useState(null)
-    const [productData, setProductData] = useState({
-        id: id,
-        name: name,
-        description: description,
-        price: price, 
-        imageUrl: imageUrl, 
-        address: address ,
-        reason_sell: reason_sell,
-        shipping: shipping,
-        pd_life: pd_life,
-        integrity: integrity,
-        productCategory: productCategory,
-        pd_options_attr: pd_options_attr,
-    })
+    const [productData, setProductData] = useState(props.product)
   
-    console.log(productData.pd_options_attr)
-    console.log(ID_ATTPro_FromEdit);
+ 
 
 
     const [updateProduct, { loading, error }] = useMutation (UPDATE_PRODUCT, {
       onCompleted: data => {
         ClickEdit()
-        console.log(data)
         setProductData(data.updateProduct)
       },
       refetchQueries: [{ query: QUERY_PRODUCTS }, { query: ME }]
@@ -137,7 +137,6 @@ const EditProduct = (props) => {
       try {
         if (file) {
           const url = await uploadFile()
-          console.log(url)
 
           if (url) {
             await updateProduct({
@@ -147,7 +146,9 @@ const EditProduct = (props) => {
                 price: + productData.price,
                 integrity: + productData.integrity,
                 pd_life: + productData.pd_life,
-                pd_options_attr: ID_ATTPro_FromEdit
+                pd_options_attr: ID_ATTPro_FromEdit,
+                productCategory: ID_CatPro_FromEdit,
+                shipping: IDShipping
               }
             })
           }
@@ -159,7 +160,9 @@ const EditProduct = (props) => {
               price: +productData.price,
               integrity: + productData.integrity,
               pd_life: + productData.pd_life,
-              pd_options_attr: ID_ATTPro_FromEdit
+              pd_options_attr: ID_ATTPro_FromEdit,
+              productCategory: ID_CatPro_FromEdit,
+              shipping: IDShipping
             }
           })
         }
@@ -195,11 +198,28 @@ const EditProduct = (props) => {
     const [UTU, setUTU] = useState(updateData_UTU ? true : false)
     const [MESS, setMESS] = useState(updateData_MESS ? true : false)
     //
-    useEffect(() => {
-      if (data) {
-        setAuthUser(data.user)
-      }
-    }, [data])
+   
+
+
+// Get Shipping ID
+
+    const GetID_Shipping = () => {
+      const findIdAtt =  IDShipping.find(e => e === event.target.id)
+      console.log(findIdAtt)
+     if(findIdAtt){
+      setIDShipping(IDShipping.filter((e)=>(e !== event.target.id)))
+
+     }else {
+         let idAAtt = event.target.id
+         setIDShipping(id => [...id, `${idAAtt}`])
+     }
+      console.log(IDShipping)
+  }
+
+  /////////////////////////////////////////////
+
+
+  
     return (
         <div>
             {!edit ? (
@@ -241,9 +261,9 @@ const EditProduct = (props) => {
                     <p> เหตุผลที่ขาย: <input type = "text" name = "reason_sell" value = {productData.reason_sell}></input> </p>
                     <div>
                       <p> การจัดส่ง: <input type = "text" name = "shipping" value = {productData.shipping}></input> </p>
-                      <input type = "checkbox" id = "UTU" defaultChecked = {UTU} />
+                      <input type = "checkbox" id = "UTU" defaultChecked = {UTU} onClick = {GetID_Shipping} />
                       <label> นัดรับสินค้า </label>
-                      <input type = "checkbox" id = "MESS" defaultChecked = {MESS} />
+                      <input type = "checkbox" id = "MESS" defaultChecked = {MESS}  onClick = {GetID_Shipping} />
                       <label> นัดรับสินค้า </label>
                     </div>
                     <p> สภาพสินค้า: <input type = "number" name = "integrity" value = {productData.integrity}></input> </p>

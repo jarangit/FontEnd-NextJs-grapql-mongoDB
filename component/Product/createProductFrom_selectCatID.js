@@ -31,7 +31,7 @@ const C_ProForm_SELECTID_CAT = () => {
         <div>
             <strong>เลือกหมวดหมู่สินค้า</strong>
             {data && (
-                <select id = "CAT_SELECT_ID"onChange = {GetID} onClick = {SetSelect}>
+                <select id = "CAT_SELECT_ID" onChange = {GetID} onClick = {SetSelect}>
                     {data.productCategories.map(items => {
                         return(
                         <option id = {items.id} onChange = {GetID} value = {items.name} > { !Click_SEL?("เลือกหมวดหมู่สินค้า"):(items.name) } </option>

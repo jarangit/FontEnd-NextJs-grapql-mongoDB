@@ -5,19 +5,21 @@ import gql from "graphql-tag"
 import apolloClient from '../../apollo/apolloClient'
 
 
-const QUERY_PRODUCT = gql`
+export const QUERY_PRODUCT = gql`
     query QUERY_PRODUCT ($id: ID!){
         product(id: $id){
             name
             description
             price
             imageUrl
+            image_gallery
             address
             reason_sell
             shipping
             pd_life
             integrity
             productCategory{
+                id
                 name
             }
             user{
@@ -47,6 +49,7 @@ const Products = () => {
         description, 
         price, 
         imageUrl, 
+        image_gallery,
         address,
         reason_sell,
         shipping,
@@ -56,11 +59,19 @@ const Products = () => {
         pd_options_attr,
         user
     } = data.product
-
+    console.log(image_gallery)
     return (
         <div>
             <img src = {imageUrl}  alt = {description} width = "150" />
             <h1> {name} </h1>
+            <div>
+                <h3> รูปสินค้าเพิ่มเติม </h3>
+                {image_gallery && (
+                    image_gallery.map((items, index) => (
+                        <img src = {items} key =  {index}  width = "100" />
+                    ))
+                )}
+            </div>
             <p> รายละเอียด: {description} </p>
             <p> ราคา: {price} </p>
             <p> ที่อยู่: {address} </p>

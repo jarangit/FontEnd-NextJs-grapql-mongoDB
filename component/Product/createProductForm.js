@@ -28,6 +28,7 @@ const CREATE_PRODUCT = gql`
     $pd_life: Float!
     $integrity: Float!
     $imageUrl: String!
+    $image_gallery: [String]
     $productCategory: String!
     $pd_options_attr: [String]
   ) {
@@ -41,6 +42,7 @@ const CREATE_PRODUCT = gql`
         pd_life: $pd_life
         integrity: $integrity
         imageUrl: $imageUrl
+        image_gallery: $image_gallery
         productCategory: $productCategory
         pd_options_attr: $pd_options_attr
     ){
@@ -55,6 +57,7 @@ const CreateProductForm = () => {
     const { user, setAuthUser } = useContext(AuthContext)
     const { ID_CatPro_FromC, setID_CatPro_FromC,  ID_ATTPro_FromC, setID_ATTPro_FromC} = useContext(AuthContext)
     const [IDShipping, setIDShipping] = useState([])
+    const [OB_IMG_S, setOB_IMG_S] = useState([])
 
     const { data } = useQuery(ME)
     //https://api.cloudinary.com/v1_1/the-guitar-next/image/upload
@@ -62,6 +65,7 @@ const CreateProductForm = () => {
         name: "",
         description: "",
         imageUrl: "",
+        image_gallery: "",
         price: "",
         address: "",
         pd_options_attr: ID_ATTPro_FromC,
@@ -73,6 +77,7 @@ const CreateProductForm = () => {
       })
     const [success, setSuccess] = useState('')
     const [file, setFiles] = useState(null)
+    const [files_image_gallery, setfiles_image_gallery] = useState([])
     
     const [createProduct, { loading, error }] = useMutation (CREATE_PRODUCT, {
         refetchQueries: [{ query: QUERY_PRODUCTS }]
@@ -87,7 +92,12 @@ const CreateProductForm = () => {
         const files = e.target.files
         setFiles(files[0])
     }
-
+    const SelectMultiFiles = e => {
+        const files = e.target.files
+        console.log(files)
+        setfiles_image_gallery(files)
+    }
+    
 
     const UploadFiles = async () => {
         const data = new FormData()
@@ -107,15 +117,45 @@ const CreateProductForm = () => {
         return result.secure_url
          
     }
+    const Upload_image_gallery = async () => {
+        let url = []
+        for (let i = 0; i < files_image_gallery.length; i++) {
+            const data = new FormData()
+            data.append('file', files_image_gallery[i])
+            data.append('upload_preset', 'the-guitar-next')
 
-    const handleSubmit = async e => {
+            const res = await fetch(
+                'https://api.cloudinary.com/v1_1/the-guitar-next/image/upload',
+                {
+                    method: 'post',
+                    body: data
+                }
+            )
+
+
+            const result = await res.json()
+
+            console.log(result.secure_url);
+            console.log('เสร็จ');
+            let y = 1
+            url.push(result.secure_url)
+            console.log(url)
+            // return console.log('ออกละ')
+        }  
+
+        return url
+
+    }
+
+    const handleSubmit = async e => {   
         try{
             e.preventDefault()
             console.log(productData)
             // const urlImg = await UploadFiles()
+            const url_img_multi = await Upload_image_gallery()
             const urlImg = "https://res.cloudinary.com/the-guitar-next/image/upload/v1598983747/the-guitar-next/uxzu7fbvladtszcvvdcm.jpg"
-            console.log(urlImg)
-            if (urlImg) {
+            console.log(url_img_multi)
+            if (url_img_multi) {
                 const result = await createProduct({
                     variables: { 
                         ...productData, 
@@ -123,6 +163,7 @@ const CreateProductForm = () => {
                         pd_life: +productData.pd_life,
                         integrity: +productData.integrity,
                         imageUrl: urlImg,
+                        image_gallery: url_img_multi,
                         productCategory: ID_CatPro_FromC,
                         pd_options_attr: ID_ATTPro_FromC,
                         shipping: IDShipping
@@ -136,6 +177,7 @@ const CreateProductForm = () => {
                 name: '',
                 description: '',
                 imageUrl: '',
+                image_gallery: '',
                 price: '',
                 address: '',
                 pd_options_attr: '',
@@ -214,9 +256,13 @@ const CreateProductForm = () => {
                 <div>
                     <strong> สภาพสินค้า </strong><input type = "number" placeholder = "สภาพสินค้า" name = "integrity" value = {productData.integrity} onChange = {handleChange}/>
                 </div>
-                {/* <div>
-                    <strong> Image </strong><input type = "file" placeholder = "Image-URL" name = "file" onChange = {SelectFiles}/>
-                </div> */}
+                <div>
+                    <strong> รูปหบักสินค้า </strong><input type = "file" placeholder = "Image-URL" name = "file" onChange = {SelectFiles}/>
+                </div>
+                <div>
+                    <strong> รูปสินค้าเพิ่มเติม </strong><input type = "file" placeholder = "Image-URL" name = "file" multiple="multiple" onChange = {SelectMultiFiles}/>
+                </div>
+                <button onClick = {Upload_image_gallery} > Test Upload_image_gallery </button>
                 <button 
                 type = "submit" 
                 // disabled={
