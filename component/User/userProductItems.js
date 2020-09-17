@@ -7,6 +7,7 @@ import { ME } from './userProducts'
 import { useQuery } from '@apollo/react-hooks'
 import { AuthContext } from '../../appState/authProvider'
 import Link from 'next/link'
+import { useForm } from 'react-hook-form'
 
 
 const UPDATE_PRODUCT = gql`
@@ -51,12 +52,13 @@ const DELETE_PRODUCT = gql`
 `
 
 const UserProductItems = ({products}) => {
-
     const [edit, setEdit] = useState(false)
     const [file, setFile] = useState(null)
     const [productData, setProductData] = useState(products)
     const { user, setAuthUser } = useContext(AuthContext)
     const { data } = useQuery(ME)
+    const { handleSubmit} = useForm();
+
     console.log(productData)
     const [updateProduct, { loading, error }] = useMutation (UPDATE_PRODUCT, {
       onCompleted: data => {
@@ -95,10 +97,10 @@ const UserProductItems = ({products}) => {
 
 
 
-    const handleSubmit = async () => {
+    const onSubmit = async () => {
       if (!file && productData === products) {
         setProductData(products)
-        ClickEdit()
+        // ClickEdit()
         return  console.log('No change');
       }
   
@@ -114,7 +116,8 @@ const UserProductItems = ({products}) => {
               variables: {
                 ...productData,
                 imageUrl: url,
-                price: +productData.price
+                price: +productData.price,
+
               }
             })
           }
@@ -123,7 +126,7 @@ const UserProductItems = ({products}) => {
             variables: {
               ...productData,
               imageUrl: productData.imageUrl,
-              price: +productData.price
+              price: +productData.price,
             }
           })
         }
@@ -151,6 +154,7 @@ const UserProductItems = ({products}) => {
     }
 
     useEffect(() => {
+      setFile(null)
       if (data) {
         setAuthUser(data.user)
       }
@@ -173,14 +177,16 @@ const UserProductItems = ({products}) => {
                     <button style = {{ background: 'red' }}  onClick = { ()=> handelDelPro(products.id) } > Delete </button>
                 </div>
             ):(
-                <div>
+                <form  onSubmit = {handleSubmit(onSubmit)} onChange = {handelChange} >
                     <img src = {products.imageUrl} width = "100"/> <input type = "file" placeholder = "Image-URL" name = "file"  onChange = {selectFile}/>
-                    <p> Name: <input type = "text" name = "name" value = {productData.name} onChange = {handelChange} ></input> </p>
-                    <p> Price: <input type = "number" name = "price" value = {productData.price} onChange = {handelChange} ></input> </p>
-                    <p> Description: <input type = "text" name = "description" value = {productData.description}  onChange = {handelChange} ></input> </p>
+                    <label> Name: <input type = "text" name = "name" value = {productData.name}></input> </label>
+                    <label> Price: <input type = "number" name = "price" value = {productData.price}></input> </label>
+                    <label> Description: <input type = "text" name = "description" value = {productData.description}></input> </label>
                     <button style = {{ background: 'red' }} onClick={ClickEdit} > Cancel </button>
-                    <button style = {{ background: 'green' }} onClick = {handleSubmit}  > {loading ? ('Loading'):("Confirm")}   </button>
-                </div>
+                    <button type = "submit" style = {{ background: 'green' }} value = "submit" > {loading ? ('Loading'):("Confirm")}</button>
+                    <input type = "submit"  value="Submit" />
+
+                </form>
             )} 
             
             

@@ -5,7 +5,9 @@ import { AuthContext } from '../../../appState/authProvider'
 
 const DropDown_ProCat = (props) => {
     useEffect(() => {
-        setID_CatPro_FromEdit(props.dataCat.id)
+        if(props.dataCat){
+            setID_CatPro_FromEdit(props.dataCat.id)
+        }
     }, [props.dataCat])
     const { data, loading, error } = useQuery(QUERY_PRODUCTS_CAT)
     const { ID_CatPro_FromEdit, setID_CatPro_FromEdit } = useContext(AuthContext)
@@ -25,7 +27,7 @@ const DropDown_ProCat = (props) => {
             <strong>เลือกหมวดหมู่สินค้า</strong>
             {data && (
                 <select id = "CAT_SELECT_ID" onChange = {GetID}>
-                    {data.productCategories.map(items => {
+                    {props.dataCat && data.productCategories.map(items => {
                         let Val_selectes 
                         if (props.dataCat.name === items.name) {
                             Val_selectes = "selected"

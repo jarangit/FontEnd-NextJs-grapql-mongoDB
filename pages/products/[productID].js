@@ -8,6 +8,7 @@ import apolloClient from '../../apollo/apolloClient'
 export const QUERY_PRODUCT = gql`
     query QUERY_PRODUCT ($id: ID!){
         product(id: $id){
+            id
             name
             description
             price
@@ -45,11 +46,12 @@ const Products = () => {
     console.log(data.product)
 
     const {
+        id,
         name, 
         description, 
         price, 
         imageUrl, 
-        image_gallery,
+        image_gallery, 
         address,
         reason_sell,
         shipping,
@@ -59,7 +61,6 @@ const Products = () => {
         pd_options_attr,
         user
     } = data.product
-    console.log(image_gallery)
     return (
         <div>
             <img src = {imageUrl}  alt = {description} width = "150" />

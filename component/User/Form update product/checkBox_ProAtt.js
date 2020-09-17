@@ -37,9 +37,9 @@ const CheckBox_ProAtt = (props) => {
                     {data.productAttributes.map(items => (
                         <div>
                             <h3> {items.name} </h3>
-                                {items.pd_options_attrs.map((subItems, index) => {
+                                {items && items.pd_options_attrs.map((subItems, index) => {
                                     let CheckID = false
-                                            {props.dataAtt.map(itemsMain => {
+                                            {props.dataAtt && props.dataAtt.map(itemsMain => {
                                                 if ( itemsMain.id === subItems.id ){
                                                     CheckID = true
                                                 }
