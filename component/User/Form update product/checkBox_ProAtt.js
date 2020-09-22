@@ -13,21 +13,23 @@ const CheckBox_ProAtt = (props) => {
 
     useEffect(() => {
         //เซ็คค่า attt เดิมให้ state ใช้เผื่อ เวลาไม่มีการเปลี่ยนแปลงค่า att ก็ใช่ค่าเพิ่ม ทำการ updata product
-        setID_ATTPro_FromEdit(props.dataAtt.filter(item => !!item.id).map(e => `${e.id}`));
+        if(props.dataAtt){
+            setID_ATTPro_FromEdit(props.dataAtt.filter(item => !!item.id).map(e => `${e.id}`));
+        }
         }, [props.dataAtt])
 
 
 
         const GetID =() => {
-        const findIdAtt =  ID_ATTPro_FromEdit.find(e => e === event.target.id )
-        if(findIdAtt){
-            setID_ATTPro_FromEdit(ID_ATTPro_FromEdit.filter((e)=>(e !== event.target.id)))
- 
-        }else {
-            let idAAtt = event.target.id
-            setID_ATTPro_FromEdit(id => [...id, `${idAAtt}`])
+            const findIdAtt =  ID_ATTPro_FromEdit.find(e => e === event.target.id )
+            if(findIdAtt){
+                setID_ATTPro_FromEdit(ID_ATTPro_FromEdit.filter((e)=>(e !== event.target.id)))
+    
+            }else {
+                let idAAtt = event.target.id
+                setID_ATTPro_FromEdit(id => [...id, `${idAAtt}`])
+            }
         }
-     }
 
     return (
         <div style = {{ border: "1px solid red" }}>

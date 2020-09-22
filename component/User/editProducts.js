@@ -86,10 +86,11 @@ const EditProduct = (props) => {
         pd_options_attr,
     } = props.product
     //----EDIT_PRODUCT----
-    const [edit, setEdit] = useState(false)
+    const [edit, setEdit,] = useState(false)
+    const [edit_img_gall, setEdit_img_gall,] = useState(false)
     const [file, setFile] = useState(null)
-    const [files_image_gallery, setfiles_image_gallery] = useState([null])
-
+    const [files_image_gallery, setfiles_image_gallery] = useState([])
+    const [data_img_gall, setdata_img_gall] = useState(props.product.image_gallery)
  
 
 
@@ -107,7 +108,7 @@ const EditProduct = (props) => {
         console.log(files[0]);
       }
       console.log(file);
-      console.log(files_image_gallery);
+      console.log(files_image_gallery)
     const SelectMultiFiles = e => {
         const files = e.target.files
         console.log(files)
@@ -163,7 +164,9 @@ const EditProduct = (props) => {
         setProductData({ ...productData, [e.target.name]: e.target.value})
     }
 
-
+    // if(files_image_gallery[0] !== []){
+    //   alert("have files")
+    // }
 
     const onSubmit = async () => {
       if (!file && productData === props.product) {
@@ -175,8 +178,6 @@ const EditProduct = (props) => {
 
       try {
         if (file) {
-          console.log('Have File')
-          alert("jr")
           const url = await uploadFile()
           if (url) {
             await updateProduct({
@@ -189,10 +190,25 @@ const EditProduct = (props) => {
                 pd_options_attr: ID_ATTPro_FromEdit,
                 productCategory: ID_CatPro_FromEdit,
                 shipping: IDShipping,
-                image_gallery: productData.image_gallery,
               }
             })
           }
+        } else if(files_image_gallery[0] !== []){
+          alert("Have uel gallery")
+          const url_image_gallery = await Upload_image_gallery()
+          await updateProduct({
+            variables: {
+              ...productData,
+              imageUrl: productData.imageUrl,
+              price: + productData.price,
+              integrity: + productData.integrity,
+              pd_life: + productData.pd_life,
+              pd_options_attr: ID_ATTPro_FromEdit,
+              productCategory: ID_CatPro_FromEdit,
+              shipping: IDShipping,
+              image_gallery: url_image_gallery
+            }
+          })
         } else {
           await updateProduct({
             variables: {
@@ -209,40 +225,27 @@ const EditProduct = (props) => {
           })
         }
 
-        if (files_image_gallery){
-          alert("Have uel gallery")
-          const url_image_gallery = await Upload_image_gallery()
-          await updateProduct({
-            variables: {
-              ...productData,
-              imageUrl: url,
-              price: + productData.price,
-              integrity: + productData.integrity,
-              pd_life: + productData.pd_life,
-              pd_options_attr: ID_ATTPro_FromEdit,
-              productCategory: ID_CatPro_FromEdit,
-              shipping: IDShipping,
-              image_gallery: url_image_gallery
-            }
-          })
-        } 
-        
       } catch (error) {
         console.log(error)
       }
       console.log(props.product)
-      setfiles_image_gallery([null])
+      setfiles_image_gallery([])
       setFile(null)
       ClickEdit()
+      location.reload();
 
     }
     console.log(productData)
 
     const ClickEdit = () =>{
       setEdit(!edit)
-      setfiles_image_gallery([null])
+      setfiles_image_gallery([])
       setFile(null)
       setProductData(props.product)
+      console.log(IDShipping);
+    }
+    const ClickEdit_ImgGall = () =>{
+      setEdit_img_gall(!edit_img_gall)
     }
     //----END_EDIT_PRODUCT-----
 
@@ -269,8 +272,9 @@ const EditProduct = (props) => {
 
 
   useEffect(() => {
+    setIDShipping(productData.shipping)
+
     if(edit){
-      setIDShipping(props.product.shipping)
       setProductData(props.product)
     }
     if (data) {
@@ -289,6 +293,60 @@ const EditProduct = (props) => {
     //
   }, [data])
   
+  
+  const GetID_Img_Del = async () => {
+    let dataImgGall = productData.image_gallery
+    console.log(event.target.id)
+    const findUrl =  dataImgGall.find(e => e === event.target.id )
+    if(findUrl){
+        setdata_img_gall(data_img_gall.filter((e)=>(e !== event.target.id)))
+      }
+      console.log(data_img_gall);
+    }
+
+    const UPDATE_IMAGE_GALLERY = async () => {
+      console.log(files_image_gallery[0]);
+    try {
+      if(files_image_gallery[0] !== undefined){
+        alert("Have uel gallery")
+        console.log("Have uel gallery")
+        const url_image_gallery = await Upload_image_gallery()
+        await updateProduct({
+          variables: {
+            ...productData,
+            imageUrl: productData.imageUrl,
+            price: + productData.price,
+            integrity: + productData.integrity,
+            pd_life: + productData.pd_life,
+            pd_options_attr: ID_ATTPro_FromEdit,
+            productCategory: ID_CatPro_FromEdit,
+            shipping: IDShipping,
+            image_gallery: url_image_gallery
+          }
+        })
+      } else {
+        await updateProduct({
+          variables: {
+            ...productData,
+            imageUrl: productData.imageUrl,
+            image_gallery: data_img_gall,
+            price: +productData.price,
+            integrity: + productData.integrity,
+            pd_life: + productData.pd_life,
+            pd_options_attr: ID_ATTPro_FromEdit,
+            productCategory: ID_CatPro_FromEdit,
+            shipping: IDShipping
+          }
+        })
+      }
+    } catch (error) {
+      console.log(error);
+    }
+      
+      location.reload();
+      ClickEdit_ImgGall()      
+    }
+
     return (
         <div>
             {!edit ? (
@@ -332,16 +390,36 @@ const EditProduct = (props) => {
                   <form onChange = {handelChange} onSubmit = {handleSubmit(onSubmit)} >
                     <img src = {imageUrl} width = "100"/> <input type = "file" placeholder = "Image-URL" name = "file"  onChange = {selectFile}/>
                     <div>
-                        <h3> รูปสินค้าเพิ่มเติม </h3>
-                        {image_gallery && (
-                            image_gallery.map((items, index) => (
-                                <>
-                                    <img src = {items} key =  {index}  width = "100" />
-                                    <button> X </button>
-                                </>
-                            ))
-                        )}
-                        <input type = "file" placeholder = "Image-URL" name = "file" multiple="multiple"  onChange = {SelectMultiFiles}/> 
+                      {!edit_img_gall? (
+                        <div>
+                          <h3> รูปสินค้าเพิ่มเติม </h3>
+                          {image_gallery && (
+                              props.product.image_gallery.map((items, index) => (
+                                  <img src = {items} key =  {index}  width = "100" />
+                              ))
+                          )}
+                            <button onClick = {ClickEdit_ImgGall} > EDIT IMAGE GALLERY </button>
+                        </div>
+                      ):(
+                        <div>
+                            <h3> รูปสินค้าเพิ่มเติม </h3>
+                            {image_gallery && (
+                                data_img_gall.map((items, index) => (
+                                    <>
+                                        <img src = {items} key = {index} id = {items}  width = "100" />
+                                        <label id = {items}  onClick = {GetID_Img_Del} > X </label>
+                                    </>
+                                ))
+                            )}
+                            <div>
+                              <input type = "file" placeholder = "Image-URL" name = "file" multiple="multiple"  onChange = {SelectMultiFiles}/>   
+                            </div>
+                            <div>
+                              <label style = {{border: "1px solid red" ,backgroundColor: "yellow"}}  onClick = {ClickEdit_ImgGall} > CANCEL </label>
+                              <label style = {{border: "1px solid green" ,backgroundColor: "green"}} onClick = {UPDATE_IMAGE_GALLERY} > UPDATE </label>
+                            </div>
+                        </div>
+                      )}
                     </div>
                     <p> Name: <input type = "text" name = "name" value = {productData.name}  ></input> </p>
                     <p> Price: <input type = "number" name = "price" value = {productData.price} ></input> </p>
