@@ -16,3 +16,23 @@ h1, h2, h3, h4, h5, h6{
   max-width: 1300px;
   margin: 0 auto;
 }
+div{
+  font-size: 16px;
+}
+.btn_def{
+  color: white;
+  background: #6D848A;
+  padding: 5px 10px;
+  border-radius: 0.3rem;
+  text-decoration: none;
+}
+.btn_def:hover{
+  background: #A9CEC2;
+}
+.box_img_def{
+  height: 200px;
+  overflow: hidden;
+}
+.box_img_def.img{
+  width: 100%;
+}

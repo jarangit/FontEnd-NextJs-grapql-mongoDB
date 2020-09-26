@@ -6,35 +6,36 @@ import Router from 'next/router'
 
 const ButLogout = styled.button`
     background: none;
-    color: #ff00aa;
-    border: 1px solid #ff00aa;
+    color: #8E69D0;
+    border: 1px solid #8E69D0;
     padding: 10px;
     border-radius: 0.7rem;
     :hover{
-        background: #ff00aa;
+        background: #8E69D0;
         color: white;
     }
 `
 
 const MenuSyt = styled.div`
-    background: black;
+    background: #232323;
     color: white;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    height: 100px;
+    /* justify-content: space-between; */
+    /* height: 100px; */
     align-items: center;
     h1 {
         color: white;
     }
     a {
-        color: white;
+        color: #87A9A8;
         text-decoration: none;
         :hover{
-            color: #ff00aa;
+            color: #DDEEEF;
         }
     }
     ul{
+        padding: 0px;
         display: flex;
         align-items: center;
         li{
@@ -43,10 +44,10 @@ const MenuSyt = styled.div`
         }
             .email-user{
                 a{
-                    color: #ff00aa;
+                    color: #8E69D0;
                     :hover{
                         text-decoration: underline;
-                        text-decoration-color: #ff00aa;
+                        text-decoration-color: #8E69D0;
                         transition: 0.3s;
 
                     }
@@ -61,8 +62,8 @@ const Menu = () => {
 
     console.log(user)
     return(
-        <MenuSyt>
-            <h1> GUITAR NEXT <span style  ={{ color: 'red', fontSize: "20px" }} > [Develop] </span> </h1>
+        <div style = {{ background: '#232323' }}>
+            <MenuSyt className = 'container'>
             <ul>
                 <li>
                     <a href = "/" key = "home"> Home </a>
@@ -80,12 +81,6 @@ const Menu = () => {
                              My product 
                         </a>
                     </li>
-                    <li className = "email-user">
-                        <Link href = "/user/[userID]" as = {`/user/${user.id}`} replace >
-                            <a> {user.email} </a>
-                        </Link>
-                    </li>
-                    <ButLogout onClick = { Signout } > Logout </ButLogout>
                    </>
                 )}
                 {!user && (
@@ -104,6 +99,7 @@ const Menu = () => {
                 )}
             </ul>
         </MenuSyt>
+        </div>
     )
 }
 export default Menu
