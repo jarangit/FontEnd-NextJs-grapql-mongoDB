@@ -13,17 +13,12 @@ import Moment from "react-moment";
 ///---- Sty
 
 const Div = styled.div`
-  width: 300px;
-  display: flex;
-  flex-wrap: wrap;
   .jr_card_pro{
     border: solid 2px rgba(109, 132, 138,0.3); ;
-    /* border-color: #566068; */
     margin: 15px 10px;
     padding-bottom: 20px;
   }
   div {
-    /* background: white; */
     text-align: center;
     .a_pro_name {
       color: #566068;

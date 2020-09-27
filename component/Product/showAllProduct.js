@@ -6,8 +6,12 @@ import { AuthContext } from "../../appState/authProvider";
 import ProductList from "./productList";
 
 const BoxPro = styled.div`
-  display: flex;
-  flex-wrap: wrap;
+  .jr_card_test{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 300px);
+    grid-gap: 1.5rem;
+    justify-content: center;
+    }
 `;
 
 export const QUERY_PRODUCTS = gql`
@@ -37,13 +41,19 @@ const ShowAllProduct = () => {
   if (loading) return <p>Loading...</p>;
 
   return (
-    <div style = {{ background: "#e6efec" }} >
+    <div style={{ background: "#f7f7f7", alignItems: "center" }}>
       <div className="container">
-        <h1 style={{ textAlign: "center" }}> PRODUCT </h1>
+        <h1 style={{ textAlign: "center", padding: "100px 0 30px 0" }}>
+          {" "}
+          PRODUCT{" "}
+        </h1>
         <BoxPro>
-          {data.products.map((items) => {
+          <div className="jr_card_test">
+            {data.products.map((items) => {
             return <ProductList product={items} />;
           })}
+           
+          </div>
         </BoxPro>
       </div>
     </div>
