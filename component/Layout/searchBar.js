@@ -9,6 +9,8 @@ const DIV = styled.div`
     flex-wrap: wrap;
     justify-content: flex-end;
     align-items: baseline;
+    margin: 0 20px;
+
     #searchbar-contact{   
         color: white;
     }

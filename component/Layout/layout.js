@@ -13,6 +13,7 @@ const Layout = ({children}) => {
     return (
         <Div>
             <Menu/>
+            <div></div>
             <div>
             <TopBar/>
             <SearchBar/>
