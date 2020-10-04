@@ -12,15 +12,15 @@ const DIV = styled.div`
     a{
         padding: 0 10px;
         text-decoration: none;
-        color: white;
+        color: black;
 
     }
     #topBar-gmail{
-        color: #DDEEEF;
+        color: #566068;
     }
     div{
         button{
-            border-color: #84A6A5;
+            border-color: #566068;
             border-radius: 0.3rem;
             background: none;   
             color: white;
@@ -40,10 +40,10 @@ const TopBar = () => {
     const { user, Signout } = useContext(AuthContext)
 
     return (
-        <div  style = {{ background: '#566068' }} >
+        <div>
             <DIV className = "container">
             <div id = "topBar-gmail" >
-                <strong>theguitarnext@gmail.com</strong>
+                {/* <strong>theguitarnext@gmail.com</strong> */}
                 
             </div>
             <div>

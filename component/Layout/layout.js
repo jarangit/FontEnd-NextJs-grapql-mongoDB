@@ -3,15 +3,23 @@ import Menu from './menu'
 import Footer from './footer'
 import SearchBar from './searchBar'
 import TopBar from './topBar'
+import styled from 'styled-components'
+
+const Div = styled.div`
+    display:grid;
+    grid-template-columns: 15% auto;
+`
 const Layout = ({children}) => {
     return (
-        <div>
+        <Div>
+            <Menu/>
+            <div>
             <TopBar/>
             <SearchBar/>
-            <Menu/>
-            {children}
-            <Footer/>
-        </div>
+                {children}
+            {/* <Footer/> */}
+            </div>
+        </Div>
     )
 }
 

@@ -4,43 +4,31 @@ import { AuthContext } from '../../appState/authProvider'
 import styled from 'styled-components'
 import Router from 'next/router'
 
-const ButLogout = styled.button`
-    background: none;
-    color: #8E69D0;
-    border: 1px solid #8E69D0;
-    padding: 10px;
-    border-radius: 0.7rem;
-    :hover{
-        background: #8E69D0;
-        color: white;
-    }
-`
 
 const MenuSyt = styled.div`
-    background: #232323;
+    width: 100%;
+    background: white;
     color: white;
-    display: flex;
-    flex-wrap: wrap;
     /* justify-content: space-between; */
     /* height: 100px; */
-    align-items: center;
     h1 {
-        color: white;
+        color: #268386;
+        text-align:center;
+        margin: 30px 0;
     }
     a {
-        color: #87A9A8;
+        color: #566068;
         text-decoration: none;
         :hover{
-            color: #DDEEEF;
+            color: #00B38F;
         }
     }
     ul{
-        padding: 0px;
-        display: flex;
+        padding: 0 0 0 20px;
         align-items: center;
         li{
+            margin: 20px 0;
             list-style: none;
-            margin: 0 15px;
         }
             .email-user{
                 a{
@@ -62,23 +50,23 @@ const Menu = () => {
 
     console.log(user)
     return(
-        <div style = {{ background: '#232323' }}>
-            <MenuSyt className = 'container'>
+            <MenuSyt>
+                <h1>GUITAR NEXT</h1>
             <ul>
                 <li>
-                    <a href = "/" key = "home"> Home </a>
+                    <a href = "/" key = "home"> หน้าแรก </a>
                 </li>
                 <li>
-                    <a href = "/products" key = "product"> Product </a>
+                    <a href = "/products" key = "product"> สินค้า </a>
                 </li>
                 {user && (
                    <>
                     <li>
-                        <a href = "/cart_items"> Cart </a>
+                        <a href = "/cart_items"> รายการที่ชื่นชอบ </a>
                     </li>
                     <li>
                         <a href = "/user_products" >
-                             My product 
+                             สินค้าของคุณ 
                         </a>
                     </li>
                    </>
@@ -87,19 +75,18 @@ const Menu = () => {
                    <>
                     <li>
                         <Link href = "/register/signUp" >
-                          <a> Sign Up </a>
+                          <a> สมัครสมาชิก </a>
                         </Link>
                     </li>
                     <li>
                         <Link href = "/register/signIn">
-                            <a> Sign In </a>
+                            <a> เข้าสู่ระบบ </a>
                         </Link>
                     </li>
                    </>
                 )}
             </ul>
         </MenuSyt>
-        </div>
     )
 }
 export default Menu

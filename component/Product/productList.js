@@ -9,20 +9,36 @@ import { ME } from "../User/userProducts";
 import { useQuery } from "@apollo/react-hooks";
 import NumberFormat from "react-number-format";
 import Moment from "react-moment";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+import { fab } from "@fortawesome/free-brands-svg-icons";
+import { far } from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+library.add(fas, fab, far);
 
 ///---- Sty
 
 const Div = styled.div`
-  .jr_card_pro{
-    border: solid 2px rgba(109, 132, 138,0.3); ;
+  .jr_card_pro {
+    border: solid 2px rgba(109, 132, 138, 0.3);
     margin: 15px 10px;
     padding-bottom: 20px;
+    position: ;
   }
   div {
     text-align: center;
     .a_pro_name {
       color: #566068;
       text-decoration: none;
+      :hover {
+        color: #a9cec2;
+      }
+    }
+  }
+  .icon_heart {
+    font-size: 20px;
+    svg:hover {
+      color: #ff6d6d;
     }
   }
 `;
@@ -67,20 +83,28 @@ const ProductList = ({ product }) => {
   console.log(cartProductId);
 
   if (user && cartProductId.includes(product.id)) {
-    buttomy = <button>carted </button>;
+    buttomy = (
+      <div className="icon_heart">
+        <FontAwesomeIcon icon={["fas", "heart"]} color="#ff6d6d" />
+      </div>
+    );
   } else if (user && user.id === product.user.id) {
     buttomy = (
-      <button onClick={() => Router.push("/myproducts")}> Your Product </button>
+      <Link href = "/user_products/[prodoctID]" as = {`/user_products/${product.id}`}>
+        <a className  ="a_blue">สินค้าของคุณ</a>
+      </Link>
     );
   } else {
     buttomy = (
-      <button
-        style={{ background: "green" }}
-        onClick={() => handelAddToCart(product.id)}
-      >
-        {" "}
-        add to cart{" "}
-      </button>
+      // <button
+      //   style={{ background: "green" }}
+      //   onClick={() => handelAddToCart(product.id)}
+      // >
+      //   add to cart{" "}
+      // </button>
+      <div className="icon_heart" onClick={() => handelAddToCart(product.id)}>
+        <FontAwesomeIcon icon={["far", "heart"]} color="gray" />
+      </div>
     );
   }
 
@@ -95,17 +119,19 @@ const ProductList = ({ product }) => {
 
   return (
     <Div>
-      <div key={product.id } className = "jr_card_pro">
+      <div key={product.id} className="jr_card_pro">
         <div className="box_img_def">
           <img src={product.imageUrl} width="100%" />
+          <FontAwesomeIcon icon={["far", "heart"]} size="1x" />
         </div>
-        <Link href="/products/[prodoctID]" as={`/products/${product.id}`}>
-          <a className="a_pro_name">
-            <h3>{product.name}</h3>
-          </a>
-        </Link>
-        <p>
-          ราคา:
+        <div style={{ height: "50px", overflow: "hidden", margin: "10px 0" }}>
+          <Link href="/products/[prodoctID]" as={`/products/${product.id}`}>
+            <a className="a_pro_name">
+              <strong>{product.name}</strong>
+            </a>
+          </Link>
+        </div>
+        <div style={{ fontSize: "25px", color: "#ff6d6d" }}>
           <NumberFormat
             thousandSeparator={true}
             housandsGroupStyle="lakh"
@@ -113,17 +139,13 @@ const ProductList = ({ product }) => {
             prefix={"฿"}
             value={product.price}
           />
-        </p>
-
-        <p>
-          วันที่ลงขาย: <Moment format="YYYY/MM/DD">{product.crea}</Moment>
-        </p>
-
-        <div>
-          <Link href="/products/[prodoctID]" as={`/products/${product.id}`}>
-            <a className="btn_def">ข้อมูลเพิ่มเติม</a>
-          </Link>
         </div>
+
+        <div style={{ color: "gray" }}>
+          วันที่ลงขาย: <Moment format="YYYY/MM/DD">{product.createdAt}</Moment>
+        </div>
+
+        {buttomy}
       </div>
     </Div>
   );

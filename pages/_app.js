@@ -6,7 +6,8 @@ import { ApolloProvider } from "@apollo/react-hooks"
 import fetch from "isomorphic-unfetch"
 import cookie from "cookie"
 import { Router } from 'next/router'
-
+import '@fortawesome/fontawesome-svg-core/styles.css' 
+import "react-image-gallery/styles/css/image-gallery.css";
 
 
 export const QUERY_USER = {
