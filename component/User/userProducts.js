@@ -20,6 +20,7 @@ export const ME = gql`
         description
         imageUrl
         price
+        createdAt
       }
       carts{
         id

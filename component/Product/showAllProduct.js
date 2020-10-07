@@ -7,10 +7,10 @@ import ProductList from "./productList";
 
 const BoxPro = styled.div`
   .jr_card_test{
-    display: grid;
+    /* display: grid;
     grid-template-columns: repeat(auto-fill, 300px);
     grid-gap: 1.5rem;
-    justify-content: center;
+    justify-content: center; */
     }
 `;
 
@@ -41,11 +41,10 @@ const ShowAllProduct = () => {
   if (loading) return <p>Loading...</p>;
 
   return (
-    <div style={{ background: "#f7f7f7", alignItems: "center" }}>
+    <div style={{ alignItems: "center" }}>
       <div className="container">
-        <h1 style={{ textAlign: "center", padding: "100px 0 30px 0" }}>
-          {" "}
-          PRODUCT{" "}
+        <h1 style={{padding: "50px 0 30px 0", color: "#566068", fontSize: "50px" }}>
+          สินค้าทั้งหมด
         </h1>
         <BoxPro>
           <div className="jr_card_test">

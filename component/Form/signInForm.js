@@ -10,12 +10,10 @@ import { faFacebookF } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //Sty
 const FormSty = styled.div`
-  align-items: center;
-  display: grid;
-  grid-template-columns: 30% auto;
   .jr_form_login {
-    margin: 50px;
-    padding: 30px;
+    width: 500px;
+    margin: 50px auto;
+    padding: 20px;
     border-radius: 1em;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     input {
@@ -29,7 +27,7 @@ const FormSty = styled.div`
       color: white;
       background: #566068;
       border: none;
-      padding: 15px;
+      padding: 10px;
       margin: 10px 0;
       width: 50%;
       :hover {
@@ -225,9 +223,9 @@ const SignInForm = () => {
           </div>
           </form>
         </div>
-        <div className="jr_banner_login">
+        {/* <div className="jr_banner_login">
           <img src="https://res.cloudinary.com/the-guitar-next/image/upload/v1597081618/the-guitar-next/pgvllapjmrh7emlmf8se.png" />
-        </div>
+        </div> */}
       </FormSty>
     </div>
   );

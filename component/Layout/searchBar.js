@@ -39,7 +39,7 @@ const SearchBox = styled.input`
     width: 300px;
     border: 1px solid;
     border-color:  #d3d3d3;
-    color: white;
+    color: black;
     background: none;
     padding: 15px;
     :focus {

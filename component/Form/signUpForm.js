@@ -6,24 +6,15 @@ import Link from "next/link";
 import { faFacebookF } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-//Sty
-const FormSty = styled.form`
-  width: 200px;
-  margin: 0 auto;
-  /* align-items: center; */
-`;
+
 
 const LoginSty = styled.div`
   display: flex;
   width: 100%;
   #jr-from-login {
-    width: 50%;
+    margin: 50px auto;
     form {
-      /* .btn_signup{
-                text-align: center;
-            } */
       padding: 20px;
-      margin: 100px auto;
       width: 500px;
       border-radius: 1em;
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
@@ -42,7 +33,7 @@ const LoginSty = styled.div`
         color: white;
         background: #566068;
         border: none;
-        padding: 15px;
+        padding: 10px;
         margin: 10px 0;
         width: 50%;
         :hover {
@@ -258,9 +249,9 @@ const SignUpForm = () => {
           </div>
         </form>
       </div>
-      <div id="jr-banner-login">
+      {/* <div id="jr-banner-login">
         <img src="https://res.cloudinary.com/the-guitar-next/image/upload/v1597081618/the-guitar-next/pgvllapjmrh7emlmf8se.png" />
-      </div>
+      </div> */}
     </LoginSty>
   );
 };

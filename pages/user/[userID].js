@@ -1,5 +1,5 @@
 import React from 'react'
-import UserData from '../../component/User/accout'
+import UserData from '../../component/User/account'
 
 
 const Users = () => {

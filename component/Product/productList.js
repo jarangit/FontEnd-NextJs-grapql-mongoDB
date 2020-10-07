@@ -19,14 +19,42 @@ library.add(fas, fab, far);
 ///---- Sty
 
 const Div = styled.div`
+  display: grid;
+  grid-template-columns: 10% 60% 10% 10% 10%;
+  border-bottom: 1px solid #d3d3d3;
+  padding: 20px;
+  .pro_list_des {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: gray;
+  }
+
+  .pro_list_box_img{
+      width: 100px;
+      height: 100px;
+      overflow: hidden;
+      img{
+      width: 100px;
+    }
+  }
+  
+  table {
+    width: 100%;
+  }
+  table,
+  th,
+  td {
+    border-collapse: collapse;
+    border: 1px solid black;
+  }
   .jr_card_pro {
     border: solid 2px rgba(109, 132, 138, 0.3);
     margin: 15px 10px;
     padding-bottom: 20px;
-    position: ;
   }
   div {
-    text-align: center;
+    align-self: center;
     .a_pro_name {
       color: #566068;
       text-decoration: none;
@@ -34,6 +62,7 @@ const Div = styled.div`
         color: #a9cec2;
       }
     }
+   
   }
   .icon_heart {
     font-size: 20px;
@@ -90,8 +119,11 @@ const ProductList = ({ product }) => {
     );
   } else if (user && user.id === product.user.id) {
     buttomy = (
-      <Link href = "/user_products/[prodoctID]" as = {`/user_products/${product.id}`}>
-        <a className  ="a_blue">สินค้าของคุณ</a>
+      <Link
+        href="/user_products/[prodoctID]"
+        as={`/user_products/${product.id}`}
+      >
+        <a className="a_blue">สินค้าของคุณ</a>
       </Link>
     );
   } else {
@@ -119,7 +151,39 @@ const ProductList = ({ product }) => {
 
   return (
     <Div>
-      <div key={product.id} className="jr_card_pro">
+      <div className = "pro_list_box_img">
+        <img src={product.imageUrl}/>
+      </div>
+      <div>
+        <Link href="/products/[prodoctID]" as={`/products/${product.id}`}>
+          <a className="a_pro_name">
+            <strong>{product.name}</strong>
+          </a>
+        </Link>
+        <div className="pro_list_des">{product.description}</div>
+      </div>
+      <div className = "jr_text_center" >
+      {buttomy}
+
+      </div>
+      <div className = "jr_text_center" style={{  color: "#ff6d6d" }}>
+        <p style={{ fontSize: "16px", color: "black" }}>ราคา</p>
+        <strong>
+        <NumberFormat
+          thousandSeparator={true}
+          housandsGroupStyle="lakh"
+          displayType="text"
+          prefix={"฿"}
+          value={product.price}
+        />
+        </strong>
+      </div>
+      <div className = "jr_text_center">
+        <p>วันที่ลงขาย</p>
+        <Moment format="YYYY/MM/DD">{product.createdAt}</Moment>
+
+      </div>
+      {/* <div key={product.id} className="jr_card_pro">
         <div className="box_img_def">
           <img src={product.imageUrl} width="100%" />
           <FontAwesomeIcon icon={["far", "heart"]} size="1x" />
@@ -146,7 +210,7 @@ const ProductList = ({ product }) => {
         </div>
 
         {buttomy}
-      </div>
+      </div> */}
     </Div>
   );
 };

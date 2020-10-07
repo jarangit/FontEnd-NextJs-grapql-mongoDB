@@ -43,7 +43,7 @@ const TopBar = () => {
 
     return (
         <div>
-            <DIV className = "container">
+            <DIV>
             <div id = "topBar-gmail" >
                 {/* <strong>theguitarnext@gmail.com</strong> */}
                 

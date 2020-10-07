@@ -11,11 +11,12 @@ const MenuSyt = styled.div`
   /* height: 100px; */
   height: 100%;
   position: fixed;
-   top: 0;
-   left: 0;
-   right: 0;
-   z-index: 2;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
 
+  padding: 20px;
   h1 {
     color: #268386;
     text-align: center;
@@ -29,7 +30,8 @@ const MenuSyt = styled.div`
     }
   }
   ul {
-    padding: 0 0 0 20px;
+    padding: 0px;
+    /* padding: 0 0 0 20px; */
     align-items: center;
     li {
       margin: 20px 0;
@@ -53,12 +55,16 @@ const Menu = () => {
   console.log(user);
   return (
     <MenuSyt>
-      <h1>GUITAR NEXT</h1>
+      <Link href="/">
+        <a>
+          {" "}
+          <h1>GUITAR NEXT</h1>{" "}
+        </a>
+      </Link>
       <ul>
         <li>
           <a href="/" key="home">
-            {" "}
-            หน้าแรก{" "}
+            หน้าแรก
           </a>
         </li>
         <li>
@@ -92,6 +98,9 @@ const Menu = () => {
           </>
         )}
       </ul>
+      <div>
+        text bottom
+      </div>
     </MenuSyt>
   );
 };

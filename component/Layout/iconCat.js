@@ -5,7 +5,6 @@ import styled from "styled-components";
 
 const DIV = styled.div`
   display: grid;
-  /* grid-gap: 10px; */
   grid-template-columns: 50% 25% 25%;
   margin: 0 15px;
   .box-item {
@@ -13,66 +12,80 @@ const DIV = styled.div`
     -moz-box-shadow: 10px 10px 17px -6px rgba(0, 0, 0, 0.4);
     box-shadow: 10px 10px 17px -6px rgba(0, 0, 0, 0.4);
     background-color: white;
-    padding: 30px;
     height: auto;
     margin: 5px;
-
+    height: 300px;
+    overflow: hidden;
   }
   .item1 {
+    padding: 30px;
     border-radius: 40px;
-    .box-icon{
-        text-align: center;
-        display: flex;
-        justify-content: space-around;
-        flex-wrap: wrap;
-        div{
-            width: 120px;
-            margin: 20px;
-        }
+    h3 {
+      color: #268386;
+    }
+    .box-icon {
+      text-align: center;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, 200px);
+      justify-content: space-around;
+      div {
+        /* width: 120px; */
+        margin: 20px;
+      }
+      img {
+        width: 50px;
+      }
     }
   }
 
   .item2 {
     border-radius: 40px;
-    img{
-        width: 100%;
+    img {
+      width: 100%;
+      display: inline-block;
     }
   }
 
   .item3 {
     border-radius: 40px;
+    img {
+      width: 100%;
+      display: inline-block;
+    }
   }
 `;
 const IconCat = () => {
   return (
     <DIV>
       <div className="box-item item1">
-        <h3> หมวดหมู่สินค้า </h3>
-        <div className = "box-icon" >
+        <h2> หมวดหมู่สินค้า </h2>
+        <div className="box-icon">
           <div>
-            <FontAwesomeIcon icon={faHeadset} size="3x" color="#ff00aa" />
+            <img src="https://image.shutterstock.com/image-vector/guitar-vector-icon-600w-632693819.jpg" />
           </div>
           <div>
-            <FontAwesomeIcon icon={faHeadset} size="3x" color="#ff00aa" />
+            <img src="https://image.shutterstock.com/image-vector/guitar-vector-icon-600w-632693819.jpg" />
           </div>
           <div>
-            <FontAwesomeIcon icon={faHeadset} size="3x" color="#ff00aa" />
+            <img src="https://image.shutterstock.com/image-vector/guitar-vector-icon-600w-632693819.jpg" />
           </div>
           <div>
-            <FontAwesomeIcon icon={faHeadset} size="3x" color="#ff00aa" />
+            <img src="https://image.shutterstock.com/image-vector/guitar-vector-icon-600w-632693819.jpg" />
           </div>
           <div>
-            <FontAwesomeIcon icon={faHeadset} size="3x" color="#ff00aa" />
+            <img src="https://image.shutterstock.com/image-vector/guitar-vector-icon-600w-632693819.jpg" />
           </div>
           <div>
-            <FontAwesomeIcon icon={faHeadset} size="3x" color="#ff00aa" />
+            <img src="https://image.shutterstock.com/image-vector/guitar-vector-icon-600w-632693819.jpg" />
           </div>
         </div>
       </div>
       <div className="box-item item2">
-          <img src = "https://res.cloudinary.com/the-guitar-next/image/upload/v1601388092/the-guitar-next/rbgwoc2wcfcue1b0mmlj.jpg" />
+        <img src="https://www.crushpixel.com/static12/preview2/stock-photo-vector-illustration-party-night-dance-music-poster-template-electro-style-concert-disco-club-festival-event-flyer-invitation-1004328.jpg" />
       </div>
-      <div className="box-item item3">โฆษณา</div>
+      <div className="box-item item3">
+        <img src="https://image.shutterstock.com/image-vector/black-friday-sale-banner-design-600w-1563216475.jpg" />
+      </div>
     </DIV>
   );
 };

@@ -6,32 +6,32 @@ import { useMutation } from "@apollo/react-hooks";
 import { ME } from "./userProducts";
 import { QUERY_USER } from "../../pages/_app";
 import styled from "styled-components";
+import AccountPro from "./accountPro";
 
-const CardUser = styled.div`
-  max-width: 100%;
-  width: 70%;
-  background: white;
-  border-radius: 1rem;
-  margin: 20px auto;
-  padding: 20px;
-  text-align: center;
-  -webkit-box-shadow: 6px 3px 35px 1px rgba(0, 0, 0, 0.17);
-  -moz-box-shadow: 6px 3px 35px 1px rgba(0, 0, 0, 0.17);
-  box-shadow: 6px 3px 35px 1px rgba(0, 0, 0, 0.17);
-  img {
-    margin: 20px 0;
-  }
-  .jr_detail_user{
-      border-bottom: 1px solid #A9CEC2;
-      display: flex;
-      flex-wrap: flex;
-      justify-content: space-between;  
-      padding: 15px 0;
-      }
-`;
 const DivGrid = styled.div`
+  margin: 50px 0;
   display: grid;
-  grid-template-columns: 20% auto;
+  grid-template-columns: 25% 25% 25% 25%;
+  
+ 
+  .account_box_name{
+    align-self: center;
+
+  }
+  .account_box_img {
+    align-self: center;
+    justify-self: center;
+    /* background: red; */
+  }
+  div {
+    justify-self: left;
+    
+  }
+  input,
+  label {
+    width: 80%;
+    display: inline-block;
+  }
 `;
 
 const EDIT_USER = gql`
@@ -66,7 +66,7 @@ const UserData = () => {
   const { user, setAuthUser } = useContext(AuthContext);
   const [dataUser, setdataUser] = useState(user);
   const { data } = useQuery(ME);
-
+  console.log(user);
   useEffect(() => {
     if (data) {
       setAuthUser(data.user);
@@ -164,82 +164,29 @@ const UserData = () => {
     }
   };
   return (
-    <DivGrid>
-      {user && (
-        <div style={{ background: "#edfaff" }}>
-          {!edit ? (
-            <CardUser>
-              {ShowImageProfile()}
-              <h3> Name: {user.name} </h3>            
-              <div className="jr_detail_user">
-                <div style={{ color: "#338E90" }}>Email</div>
-                <div> {user.email} </div>
+    <>
+      <DivGrid>
+        {user && (
+          <div className  ="account_box_img">
+            {!edit ? (
+              <div>
+                  {ShowImageProfile()}
               </div>
-              <div className="jr_detail_user">
-                <div style={{ color: "#338E90" }}>Line</div>
-                <div> {user.tel} </div>
+            ) : (
+              <div>
+                {ShowImageProfile()}
+                <p>
+                  โปรเลือกรูปของคุณ:
+                  <input
+                    type="file"
+                    placeholder="Image-URL"
+                    name="file"
+                    onChange={selectFile}
+                  />
+                </p>
               </div>
-              <div className="jr_detail_user">
-                <div style={{ color: "#338E90" }}>Tel</div>
-                <div> {user.line_id} </div>
-              </div>
-              <div className="jr_detail_user">
-                <div style={{ color: "#338E90" }}>Tel</div>
-                <div> {user.address} </div>
-              </div>
-              <button onClick={ClickEdit}>Edit</button>
-            </CardUser>
-          ) : (
-            <div>
-              <h1> Name: {user.name} </h1>
-              <p> Email: {user.email} </p>
-              {ShowImageProfile()}
-              <p>
-                {" "}
-                Choose you image profile:{" "}
-                <input
-                  type="file"
-                  placeholder="Image-URL"
-                  name="file"
-                  onChange={selectFile}
-                />{" "}
-              </p>
-              <p>
-                {" "}
-                Tel:{" "}
-                <input
-                  type="text"
-                  name="tel"
-                  placeholder="Tel"
-                  value={dataUser.tel}
-                  onChange={handleChange}
-                />
-              </p>
-              <p>
-                {" "}
-                Line:{" "}
-                <input
-                  type="text"
-                  name="line_id"
-                  value={dataUser.line_id}
-                  onChange={handleChange}
-                />{" "}
-              </p>
-              <p>
-                {" "}
-                Address:{" "}
-                <input
-                  type="text"
-                  name="address"
-                  value={dataUser.address}
-                  onChange={handleChange}
-                />{" "}
-              </p>
-              <button onClick={handleSubmit}>Save</button>
-              <button onClick={ClickEdit}>Cancel</button>
-            </div>
-          )}
-          {/* <div>
+            )}
+            {/* <div>
                  <div>
                    {user.products.map(items => (
                      <div>
@@ -251,10 +198,71 @@ const UserData = () => {
                    ))}
                  </div>
                </div> */}
+          </div>
+        )}
+        <div className="account_box_name">
+          <h1>{user.name}</h1>
+          <p> {user.email} </p>
         </div>
-      )}
-      <div>2</div>
-    </DivGrid>
+        <div>
+          {!edit ? (
+            <div>
+              <p>
+                <strong>Email:</strong> {user.email}
+              </p>
+              <p>
+                <strong>Tel:</strong> {user.tel}
+              </p>
+              <p>
+                <strong>Line:</strong> {user.line_id}
+              </p>
+              <p>
+                <strong>Address:</strong> {user.address}
+              </p>
+            </div>
+          ) : (
+            <form onChange={handleChange}>
+              <label>เบอร์โทรศัพท์</label>
+              <input
+                type="text"
+                name="tel"
+                placeholder="เบอร์โทรศัพท์"
+                value={dataUser.tel}
+              />
+              <label>Line</label>
+              <input
+                type="text"
+                name="line_id"
+                placeholder="ไลน์ไอดี"
+                value={dataUser.line_id}
+              />
+              <label>ที่อยู่</label>
+              <input
+                type="text"
+                name="address"
+                placeholder="ที่อยู่"
+                value={dataUser.address}
+              />
+            </form>
+          )}
+        </div>
+        <div>
+          <p>สินค้าของคุณ</p>
+          <p>รายการที่ชื่นชอบ</p>
+          {!edit ? (
+            <div>
+              <button onClick={ClickEdit}>Edit</button>
+            </div>
+          ) : (
+            <div>
+              <button onClick={handleSubmit}>บันทึก</button>
+              <button onClick={ClickEdit}>ยกเลิก</button>
+            </div>
+          )}
+        </div>
+      </DivGrid>
+      <AccountPro dataPro={user.products} dataFav={user.carts} />
+    </>
   );
 };
 
