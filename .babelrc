@@ -1,7 +1,6 @@
 { 
     "presets": ["next/babel"], 
     "plugins": [
-        ["styled-components", { "ssr": true }],
-        // ["react-slideshow-image", { "ssr": false  }]
+        ["styled-components", { "ssr": true }]
      ]
   }

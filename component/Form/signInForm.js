@@ -22,6 +22,7 @@ const FormSty = styled.div`
       box-sizing: border-box;
       height: 35px;
       width: 100%;
+      padding: 10px;
     }
     button {
       color: white;

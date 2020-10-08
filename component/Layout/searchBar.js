@@ -57,7 +57,7 @@ const SearchBar = () => {
     return (
             <DIV>
                 <div id = 'searchbar-contact'>
-                    <SearchBox type = "search" placeholder = "search" autofocus />
+                    <SearchBox type = "search" placeholder = "search" autoFocus />
                     <label> <FontAwesomeIcon icon = {faSearch}/> Search </label>
                 </div>
             </DIV>

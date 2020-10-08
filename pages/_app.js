@@ -1,4 +1,4 @@
-import '../styles/globals.css'
+import '../styles/globals.scss'
 import Layout from '../component/Layout/layout'
 import AuthProvider  from '../appState/authProvider'
 import apolloClient from "../apollo/apolloClient"

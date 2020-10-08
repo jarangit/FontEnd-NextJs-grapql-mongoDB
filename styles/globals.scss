@@ -1,0 +1,175 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Kanit", sans-serif;
+  background: #f2f4f6;
+  color: #566068;
+}
+a{
+  color: #566068;
+}
+
+input,
+button,
+label,
+textarea {
+  font-family: "Kanit", sans-serif;
+  font-size: 16px;
+}
+
+* {
+  box-sizing: border-box;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+.a_blue {
+  color: #87a9a8;
+  text-decoration: none;
+}
+.container {
+  max-width: 1300px;
+  margin: 0 auto;
+}
+div {
+  font-size: 16px;
+}
+.btn_def {
+  color: white;
+  background: #6d848a;
+  padding: 5px 10px;
+  /* border-radius: 0.3rem; */
+  text-decoration: none;
+  border: none;
+}
+.btn_def:hover {
+  background: #a9cec2;
+}
+.box_img_def {
+  height: 200px;
+  overflow: hidden;
+}
+.box_img_def.img {
+  width: 100%;
+}
+.circular--landscape {
+  max-width: 100%;
+  width: 150px;
+  height: 150px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+/* .circular--landscape img {
+  width: auto;
+  height: 100%;
+  margin-left: -50px;
+} */
+.jr_text_center {
+  text-align: center;
+}
+
+.jr_btn_edit {
+  width: 100px;
+  background: none;
+  // padding: 5px;
+  border-radius: 40px;
+  border-color: #e5b700;
+  border-style:solid;
+  color: #e5b700;
+  border: 2px solid;
+  margin: 5px;
+
+}
+.jr_btn_edit:hover {
+  color: white;
+  background: #e5b700;
+}
+.jr_btn_edit:focus {
+  outline: none;
+}
+
+
+
+.jr_btn_success {
+  @extend .jr_btn_edit;
+  border-color: #10b541;
+  color: #10b541;
+}
+.jr_btn_success:hover {
+  color: white;
+  background: #10b541;
+}
+
+
+.jr_btn_cancel{
+  @extend .jr_btn_edit;
+  border-color: rgb(255, 109, 109);
+  color: rgb(255, 109, 109);
+}
+.jr_btn_cancel:hover {
+  color: white;
+  background: rgb(255, 109, 109);
+}
+
+.jr_btn_add{
+  @extend .jr_btn_edit;
+  border-color: #00d8d5;
+  color: #00d8d5;
+  // background: #00d8d5;
+  border-radius: 40px;
+  padding: 5px 20px;
+}
+.jr_btn_add:hover {
+  color: #00d8d5;
+  background: #dbffff;
+}
+
+
+.link_def{
+  text-decoration: none;
+}
+.link_def:hover{
+  color: #00d8d5;
+}
+.choose::-webkit-file-upload-button {
+  color: white;
+  display: inline-block;
+  background: #1CB6E0;
+  border: none;
+  padding: 7px 15px;
+  font-weight: 700;
+  border-radius: 3px;
+  white-space: nowrap;
+  cursor: pointer;
+  font-size: 10pt;
+}
+[type="file"] {
+  height: 0;
+  overflow: hidden;
+  width: 0;
+  position: relative;
+
+}
+
+.jr_btn_upload{
+  border: 1px solid #3280c9;
+  text-align: center;
+  color: #3280c9;
+  border-radius: 10px;
+  padding: 2px;
+}
+.jr_btn_upload:hover{
+  background-color: #3280c9;
+  color: white;
+  svg{
+    color: white;
+  }
+}

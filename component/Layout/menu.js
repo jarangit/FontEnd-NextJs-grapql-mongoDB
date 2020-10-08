@@ -57,8 +57,8 @@ const Menu = () => {
     <MenuSyt>
       <Link href="/">
         <a>
-          {" "}
-          <h1>GUITAR NEXT</h1>{" "}
+          
+          <h1>GUITAR NEXT</h1>
         </a>
       </Link>
       <ul>
@@ -69,14 +69,14 @@ const Menu = () => {
         </li>
         <li>
           <a href="/products" key="product">
-            {" "}
-            สินค้า{" "}
+            
+            สินค้า
           </a>
         </li>
         {user && (
           <>
             <li>
-              <a href="/cart_items"> รายการที่ชื่นชอบ </a>
+              <a href="/user_favorite_pro"> รายการที่ชื่นชอบ </a>
             </li>
             <li>
               <a href="/user_products">สินค้าของคุณ</a>

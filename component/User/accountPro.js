@@ -8,6 +8,13 @@ const DivGrid = styled.div`
   display: grid;
   grid-template-columns: 50% 50%;
   grid-gap: 10px;
+  a{
+    color: #566068;
+    text-decoration: none;
+    :hover {
+          color: #00b38f;
+        }
+  }
   div {
     border-radius: 20px;
     background: white;
@@ -45,7 +52,9 @@ const AccountPro = (props) => {
   return (
     <DivGrid className="container">
       <div>
-        <h1> สินค้าของคุณ </h1>
+        <Link href = '/user_products' >
+            <a><h1> สินค้าที่ชื่นชอบ </h1></a>
+          </Link>
         <table>
           <tr>
             <th>ชื่อ</th>
@@ -79,8 +88,10 @@ const AccountPro = (props) => {
         </table>
       </div>
 
-      <div  >
-        <h1> สินค้าที่ชื่นชอบ </h1>
+      <div>
+          <Link href = '/user_favorite_pro' >
+            <a><h1> สินค้าที่ชื่นชอบ </h1></a>
+          </Link>
         {props.dataFav.length !== 0 ? (
           <table>
             <tr>

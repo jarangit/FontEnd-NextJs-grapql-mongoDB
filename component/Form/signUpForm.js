@@ -28,6 +28,7 @@ const LoginSty = styled.div`
         box-sizing: border-box;
         height: 35px;
         width: 100%;
+        padding: 10px;
       }
       button {
         color: white;
@@ -236,7 +237,7 @@ const SignUpForm = () => {
           <div style={{ color: "green" }}>
             {success && (
               <p>
-                You successfully signed up, please{" "}
+                You successfully signed up, please
                 <Link href="/register/signIn">
                   <a>sign in</a>
                 </Link>

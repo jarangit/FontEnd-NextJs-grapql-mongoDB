@@ -49,7 +49,7 @@ const UserProducts = () => {
     console.log(data)
     return (
         <div className = "container" >
-          <h1> Your Product </h1>
+          <h1> สินค้าของคุณ </h1>
             { user && 
                 user.products.map(items => (
                     <UserProductItems  key = {items.id} products = {items} />

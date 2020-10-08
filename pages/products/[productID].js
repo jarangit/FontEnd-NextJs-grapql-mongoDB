@@ -153,12 +153,12 @@ const Products = () => {
         <div className="jr_box_detail_pro">
           <h1> {name} </h1>
           <p>
-            {" "}
-            <strong>รายละเอียด:</strong> {description}{" "}
+            
+            <strong>รายละเอียด:</strong> {description}
           </p>
           <p>
-            {" "}
-            <strong>เหตุผลที่ขาย:</strong> {reason_sell}{" "}
+            
+            <strong>เหตุผลที่ขาย:</strong> {reason_sell}
           </p>
           <p>
             <strong>ประเภทสินค้า:</strong>

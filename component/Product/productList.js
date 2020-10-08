@@ -109,7 +109,6 @@ const ProductList = ({ product }) => {
   };
   const cartProductId = user && user.carts.map((items) => items.product.id);
   let buttomy;
-  console.log(cartProductId);
 
   if (user && cartProductId.includes(product.id)) {
     buttomy = (
@@ -132,7 +131,7 @@ const ProductList = ({ product }) => {
       //   style={{ background: "green" }}
       //   onClick={() => handelAddToCart(product.id)}
       // >
-      //   add to cart{" "}
+      //   add to cart
       // </button>
       <div className="icon_heart" onClick={() => handelAddToCart(product.id)}>
         <FontAwesomeIcon icon={["far", "heart"]} color="gray" />
@@ -140,7 +139,6 @@ const ProductList = ({ product }) => {
     );
   }
 
-  console.log(user);
   useEffect(() => {
     if (data) {
       setAuthUser(data.user);

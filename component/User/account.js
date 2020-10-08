@@ -7,16 +7,16 @@ import { ME } from "./userProducts";
 import { QUERY_USER } from "../../pages/_app";
 import styled from "styled-components";
 import AccountPro from "./accountPro";
-
+import { fas } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const DivGrid = styled.div`
-  margin: 50px 0;
+  /* margin: 50px 0; */
   display: grid;
   grid-template-columns: 25% 25% 25% 25%;
-  
- 
-  .account_box_name{
-    align-self: center;
+  width: 1000px;
 
+  .account_box_name {
+    align-self: center;
   }
   .account_box_img {
     align-self: center;
@@ -25,12 +25,14 @@ const DivGrid = styled.div`
   }
   div {
     justify-self: left;
-    
   }
   input,
   label {
     width: 80%;
     display: inline-block;
+  }
+  button {
+    align-self: center;
   }
 `;
 
@@ -165,25 +167,27 @@ const UserData = () => {
   };
   return (
     <>
-      <DivGrid>
+      <DivGrid className="container">
         {user && (
-          <div className  ="account_box_img">
+          <div className="account_box_img">
             {!edit ? (
-              <div>
-                  {ShowImageProfile()}
-              </div>
+              <div>{ShowImageProfile()}</div>
             ) : (
-              <div>
+              <div style = {{ textAlign: "center" }} >
                 {ShowImageProfile()}
-                <p>
-                  โปรเลือกรูปของคุณ:
-                  <input
-                    type="file"
-                    placeholder="Image-URL"
-                    name="file"
-                    onChange={selectFile}
+                <label className="jr_btn_upload" for="file" name="file">
+                  <FontAwesomeIcon
+                    icon={["fas", "cloud-upload-alt"]}
+                    color="#3280c9"
                   />
-                </p>
+                  อัพโหลดรูป
+                </label>
+                <input
+                  type="file"
+                  placeholder="Image-URL"
+                  name="file"
+                  onChange={selectFile}
+                />
               </div>
             )}
             {/* <div>
@@ -251,12 +255,22 @@ const UserData = () => {
           <p>รายการที่ชื่นชอบ</p>
           {!edit ? (
             <div>
-              <button onClick={ClickEdit}>Edit</button>
+              <button className="jr_btn_edit" onClick={ClickEdit}>
+                แก้ไขข้อมูล
+              </button>
             </div>
           ) : (
             <div>
-              <button onClick={handleSubmit}>บันทึก</button>
-              <button onClick={ClickEdit}>ยกเลิก</button>
+              <button
+                className="jr_btn_success"
+                style={{ marginRight: "10px" }}
+                onClick={handleSubmit}
+              >
+                บันทึก
+              </button>
+              <button className="jr_btn_cancel" onClick={ClickEdit}>
+                ยกเลิก
+              </button>
             </div>
           )}
         </div>
