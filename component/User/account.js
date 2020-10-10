@@ -186,6 +186,7 @@ const UserData = () => {
                   type="file"
                   placeholder="Image-URL"
                   name="file"
+                  id="file"
                   onChange={selectFile}
                 />
               </div>

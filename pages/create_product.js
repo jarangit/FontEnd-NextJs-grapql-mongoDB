@@ -3,7 +3,7 @@ import CreateProductForm from '../component/Product/createProductForm'
 
 const CreateProduct = () => {
     return (
-        <div>
+        <div className = "container">
             <CreateProductForm/>
         </div>
     )

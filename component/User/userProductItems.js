@@ -215,7 +215,9 @@ const UserProductItems = ({ products }) => {
               </a>
             </Link>
             <div className="pro_list_des">{productData.description}</div>
-            <button className="jr_btn_edit"> ไปที่หน้าแก้ไข </button>
+            <Link  href="/user_products/[prodoctID]" as={`/user_products/${productData.id}`} >
+              <a  style = {{ padding: "0 10px", textDecoration: "none" }} className = "jr_btn_edit" > ไปที่หน้าแก้ไข </a>
+            </Link>
           </div>
           <div>
             <NumberFormat
