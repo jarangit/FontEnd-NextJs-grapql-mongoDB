@@ -7,7 +7,7 @@ const Cart_Item = () => {
     
     return (
         <div>
-            <h1 style = { {textAlign: "center"} } > CART </h1>
+            <h1 style = { {textAlign: "center"} } > รายการที่ชื่นชอบ </h1>
             <UserCartItem/>
         </div>
     )

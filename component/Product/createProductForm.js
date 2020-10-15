@@ -17,19 +17,23 @@ const DivGrid = styled.form`
   display: grid;
   grid-template-columns: 50% 50%;
   margin-bottom: 50px;
+  margin: 20px;
   input {
     display: block;
     margin: 10px 0;
+  }
+  input,textarea :focus {
+    outline-color:#53e9e4;
   }
   label {
     margin: 50px 0;
   }
   img {
-    margin-right:5px;
+    margin-right: 5px;
   }
   .createPro_box_uploadImg {
     margin-bottom: 50px;
-    h3{
+    h3 {
       text-align: left;
     }
     text-align: center;
@@ -49,8 +53,9 @@ const DivGrid = styled.form`
       }
     }
   }
-  .createPro_form{
-    input[type="text"], [type="number"]{
+  .createPro_form {
+    input[type="text"],
+    [type="number"] {
       padding: 10px;
       border-radius: 5px;
       width: 500px;
@@ -58,17 +63,16 @@ const DivGrid = styled.form`
       border-color: #d3d3d3;
       border-style: solid;
     }
-    input[type="checkbox"]{
+    input[type="checkbox"] {
       display: inline-block;
       margin-left: 10px;
     }
-    textarea{
+    textarea {
       padding: 10px;
       border-radius: 5px;
       width: 500px;
       height: 200px;
       border-color: #d3d3d3;
-
     }
   }
 `;
@@ -339,68 +343,72 @@ const CreateProductForm = () => {
         </div>
       </div>
       <div>
-        <form onSubmit={handleSubmit} className = "createPro_form">
+        <form onSubmit={handleSubmit} className="createPro_form">
           <h3>ข้อมูลสินค้า</h3>
+          <input
+            type="text"
+            placeholder="ชื่อสินค้า"
+            name="name"
+            value={productData.name}
+            onChange={handleChange}
+          />
+          <textarea
+            type="text"
+            placeholder="รายละเอียดสินค้า"
+            name="description"
+            value={productData.description}
+            onChange={handleChange}
+          />
+          <input
+            type="number"
+            placeholder="ราคา"
+            name="price"
+            value={productData.price}
+            onChange={handleChange}
+          />
+          <input
+            type="text"
+            placeholder="ที่อยู่"
+            name="address"
+            value={productData.address}
+            onChange={handleChange}
+          />
+          <C_ProForm_SELECTID_CAT />
+          <C_ProForm_SELECTID_ATT />
+          <hr style={{ width: "500px", margin: "0" }} />
+          <div className="createPro_box_shipment">
+            <div>
+              <strong>เลือกการจัดส่ง</strong>
+            </div>
+            <input id="UTU" type="checkbox" onClick={GetID_Shipping} />
+            <label> นัดรับสินค้า </label>
+            <br />
+            <input id="MESS" type="checkbox" onClick={GetID_Shipping} />
+            <label> จัดส่งสินค้าโดยระบบขนส่ง </label>
+          </div>
+
+          <div>
             <input
-              type="text"
-              placeholder="ชื่อสินค้า"
-              name="name"
-              value={productData.name}
-              onChange={handleChange}
-            />
-            <textarea
-              type="text"
-              placeholder="รายละเอียดสินค้า"
-              name="description"
-              value={productData.description}
+              type="number"
+              placeholder="อายุการใช้งาน(เดือน) ตัวอน่าง 3 เดือน"
+              name="pd_life"
+              value={productData.pd_life}
               onChange={handleChange}
             />
             <input
               type="number"
-              placeholder="ราคา"
-              name="price"
-              value={productData.price}
+              placeholder="สภาพสินค้า(%) ตัวอย่าง 90%"
+              name="integrity"
+              value={productData.integrity}
               onChange={handleChange}
             />
-            <input
-              type="text"
-              placeholder="ที่อยู่"
-              name="address"
-              value={productData.address}
-              onChange={handleChange}
-            />
-            <C_ProForm_SELECTID_CAT />
-            <C_ProForm_SELECTID_ATT />
-            <hr style = {{ width: "500px" , margin: "0"}}/>
-            <div className = "createPro_box_shipment" >
-              <div>
-                <strong>เลือกการจัดส่ง</strong>
-              </div>
-              <input id="UTU" type="checkbox" onClick={GetID_Shipping} />
-              <label> นัดรับสินค้า </label>
-              <br/>
-              <input id="MESS" type="checkbox" onClick={GetID_Shipping} />
-              <label> จัดส่งสินค้าโดยระบบขนส่ง </label>
-            </div>
-            
-            <div>
-              <input
-                type="number"
-                placeholder="อายุการใช้งาน(เดือน) ตัวอน่าง 3 เดือน"
-                name="pd_life"
-                value={productData.pd_life}
-                onChange={handleChange}
-              />
-              <input
-                type="number"
-                placeholder="สภาพสินค้า(%) ตัวอย่าง 90%"
-                name="integrity"
-                value={productData.integrity}
-                onChange={handleChange}
-              />
-            </div>
-            <p style = {{ color: "rgb(255, 109, 109)" }} > ช่องอายุการใช่งานและสภาพสินค้า ใส่เพียงตัวเลขเท่านั้น </p>
-          <button type="submit" className = "jr_btn_success"> {loading ? "loading" : "เพิ่มสินค้า"}</button>
+          </div>
+          <p style={{ color: "rgb(255, 109, 109)" }}>
+            ช่องอายุการใช่งานและสภาพสินค้า ใส่เพียงตัวเลขเท่านั้น
+          </p>
+          <button type="submit" className="jr_btn_success">
+            {loading ? "loading" : "เพิ่มสินค้า"}
+          </button>
         </form>
         <strong> {success} </strong>
         <div style={{ width: "30%", margin: "auto" }}>

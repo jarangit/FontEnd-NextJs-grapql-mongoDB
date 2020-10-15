@@ -8,6 +8,7 @@ const DivGrid = styled.div`
   display: grid;
   grid-template-columns: 50% 50%;
   grid-gap: 10px;
+  margin: 20px;
   a{
     color: #566068;
     text-decoration: none;

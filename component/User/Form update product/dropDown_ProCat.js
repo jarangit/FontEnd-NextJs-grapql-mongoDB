@@ -2,7 +2,18 @@ import React, { useContext, useEffect } from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import {QUERY_PRODUCTS_CAT} from '../../Product/createProductFrom_selectCatID'
 import { AuthContext } from '../../../appState/authProvider'
+import styled from "styled-components";
 
+
+
+const Div = styled.div`
+    select{
+        /* padding: 5px; */
+        width: 150px;
+        border-radius: 5px;
+        margin: 5px 0;
+    }
+`
 const DropDown_ProCat = (props) => {
     useEffect(() => {
         if(props.dataCat){
@@ -23,8 +34,8 @@ const DropDown_ProCat = (props) => {
     }
     console.log(ID_CatPro_FromEdit)
     return (
-        <div>
-            <strong>เลือกหมวดหมู่สินค้า</strong>
+        <Div>
+            <div>เลือกหมวดหมู่สินค้า</div>
             {data && (
                 <select id = "CAT_SELECT_ID" onChange = {GetID}>
                     {props.dataCat && data.productCategories.map(items => {
@@ -38,7 +49,7 @@ const DropDown_ProCat = (props) => {
                     })}
                 </select>
             )}
-        </div>
+        </Div>
     )
 }
 

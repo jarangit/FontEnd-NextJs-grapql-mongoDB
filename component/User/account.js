@@ -174,7 +174,7 @@ const UserData = () => {
               <div>{ShowImageProfile()}</div>
             ) : (
               <div style = {{ textAlign: "center" }} >
-                {ShowImageProfile()}
+                <img src = {URL.createObjectURL(file)} width = "200"/>
                 <label className="jr_btn_upload" for="file" name="file">
                   <FontAwesomeIcon
                     icon={["fas", "cloud-upload-alt"]}

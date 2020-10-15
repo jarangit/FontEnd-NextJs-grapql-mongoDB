@@ -3,8 +3,23 @@ import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
 import { QUERY_PRODUCTS_ATT } from '../../Product/createProductFrom_selectAtt'
 import { AuthContext } from '../../../appState/authProvider'
+import styled from "styled-components";
 
-
+const Div = styled.div`
+  form {
+      margin: 10px 0;
+    input,
+    label {
+      display: inline-block;
+    }
+    input {
+      margin: 0 5px 0 0;
+    }
+    label {
+      margin: 0 15px 0 0;
+    }
+  }
+`;
 const CheckBox_ProAtt = (props) => {
     const { data, loading, error } = useQuery(QUERY_PRODUCTS_ATT)
     const { ID_ATTPro_FromEdit, setID_ATTPro_FromEdit } = useContext(AuthContext)
@@ -32,7 +47,7 @@ const CheckBox_ProAtt = (props) => {
         }
 
     return (
-        <div style = {{ border: "1px solid red" }}>
+        <Div>
             <strong> เลือกคุณสมบัติ </strong>
             {data && (
                 <form id = "Sel_Pro_Att" onSubmit = "return false">
@@ -47,10 +62,10 @@ const CheckBox_ProAtt = (props) => {
                                                 }
                                             })}  
                                     return(
-                                        <div key = {index}>
+                                        <>
                                             <input id = {subItems.id} type="checkbox" name="vehicle1" defaultChecked = {CheckID} onClick = {GetID}/>
                                             <label> {subItems.opVal} </label>
-                                        </div>
+                                        </>
                                     )
                 
                                 })}
@@ -58,7 +73,7 @@ const CheckBox_ProAtt = (props) => {
                     ))}
                 </form>
             )}
-        </div>
+        </Div>
     )
 }
 
