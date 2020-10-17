@@ -13,7 +13,8 @@ const Div = styled.div`
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 150px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     margin: 10px auto;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);

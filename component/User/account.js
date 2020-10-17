@@ -174,7 +174,13 @@ const UserData = () => {
               <div>{ShowImageProfile()}</div>
             ) : (
               <div style = {{ textAlign: "center" }} >
-                <img src = {URL.createObjectURL(file)} width = "200"/>
+               {file !== null ? (
+                  <img src = {URL.createObjectURL(file)} width = "200" className="circular--landscape"/>
+               ):(
+                 <>
+                 {ShowImageProfile()}
+                 </>
+               )}
                 <label className="jr_btn_upload" for="file" name="file">
                   <FontAwesomeIcon
                     icon={["fas", "cloud-upload-alt"]}

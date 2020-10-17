@@ -43,6 +43,7 @@ const GridSty = styled.div`
   .items4,
   .items5 {
     border-top: 1px solid #e2e2e2;
+    margin: 20px;
   }
   .priceBox {
     display: flex;

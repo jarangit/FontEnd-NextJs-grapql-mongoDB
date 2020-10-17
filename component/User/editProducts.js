@@ -19,6 +19,9 @@ const DivGrid = styled.form`
   grid-template-columns: 50% 50%;
   margin-bottom: 50px;
   margin: 20px;
+  button {
+    width: 100px;
+  }
   h3 {
     margin-bottom: 10px;
   }
@@ -60,7 +63,7 @@ const DivGrid = styled.form`
     }
   }
   .createPro_form {
-    button{
+    button {
       width: 100px;
     }
     input[type="text"],
@@ -71,6 +74,9 @@ const DivGrid = styled.form`
       margin: 20px 0;
       border-color: #d3d3d3;
       border-style: solid;
+      ::placeholder {
+        color: #d3d3d3;
+      }
     }
     input[type="checkbox"] {
       display: inline-block;
@@ -82,6 +88,9 @@ const DivGrid = styled.form`
       width: 500px;
       height: 200px;
       border-color: #d3d3d3;
+      ::placeholder {
+        color: #d3d3d3;
+      }
     }
   }
 `;
@@ -601,7 +610,10 @@ const EditProduct = (props) => {
                 );
               })}
             </div>
-            <button onClick={ClickEdit}> EDIT </button>
+            <button onClick={ClickEdit} className="jr_btn_edit">
+              {" "}
+              แก้ไข{" "}
+            </button>
           </div>
         ) : (
           <div>
@@ -610,6 +622,7 @@ const EditProduct = (props) => {
               onChange={handelChange}
               onSubmit={handleSubmit(onSubmit)}
             >
+              <h3>ข้อมูลสินค้า</h3>
               <p>ชื่อสินค้า</p>
               <input
                 placeholder="ชื่อสินค้า"

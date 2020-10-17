@@ -249,7 +249,12 @@ const UserProductItems = ({ products }) => {
         <form onSubmit={handleSubmit(onSubmit)} onChange={handelChange}>
           <DivGrid>
             <div  style = {{ textAlign: "center" }}>
-              <img src={products.imageUrl} width="100" />
+              {file !== null? (
+                <img src = {URL.createObjectURL(file)} width="100" />
+                
+              ):(
+                <img src={products.imageUrl} width="100" />
+              )}
               <input
                 type="file"
                 placeholder="Image-URL"
