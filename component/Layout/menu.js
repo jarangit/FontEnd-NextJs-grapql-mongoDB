@@ -63,7 +63,7 @@ const Menu = () => {
       <Link href="/">
         <a>
           
-          <h1>GUITAR NEXT</h1>
+          <h1>GUITAR NEXT555</h1>
         </a>
       </Link>
       <ul>
