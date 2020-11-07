@@ -7,16 +7,21 @@ import Router from "next/router";
 const MenuSyt = styled.div`
   width: 15%;
   background: white;
-  /* justify-content: space-between; */
-  /* height: 100px; */
+
   height: 100%;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 2;
-
   padding: 20px;
+  .jr_menu_textLogin{
+    bottom: 0;
+    position: absolute;
+    a{
+      color: #268386;
+    }
+  }
   h1 {
     color: #268386;
     text-align: center;
@@ -98,8 +103,14 @@ const Menu = () => {
           </>
         )}
       </ul>
-      <div>
-        text bottom
+      <div className = "jr_menu_textLogin" >
+        <Link href = "/register/signUp" >
+          <a> ลงชื่อเข้าใช้ </a>
+        </Link>
+        :
+        <Link href = "/register/signUp" >
+          <a> สมัครสมาชิก </a>
+        </Link>
       </div>
     </MenuSyt>
   );

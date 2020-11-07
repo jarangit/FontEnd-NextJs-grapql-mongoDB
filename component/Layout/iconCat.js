@@ -2,6 +2,9 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faHeadset } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
+import { useQuery } from "@apollo/react-hooks";
+import gql from "graphql-tag";
+import Link from "next/link";
 
 const DIV = styled.div`
   display: grid;
@@ -54,13 +57,42 @@ const DIV = styled.div`
     }
   }
 `;
+
+const QUERY_CAT = gql`
+  query {
+    productCategories {
+      id
+      name
+    }
+  }
+`;
+
 const IconCat = () => {
+  const { data, loading, error } = useQuery(QUERY_CAT);
+  console.log(data);
+
+  if (error)
+    return <p>Ooobs...something went wrong, please try again later.</p>;
+
+  if (loading) return <p>Loading...</p>;
   return (
     <DIV>
       <div className="box-item item1">
         <h2> หมวดหมู่สินค้า </h2>
         <div className="box-icon">
           <div>
+            {data.productCategories.map((items) => (
+              <div>
+                <Link
+                  href={"/cat_product/[catProID]"}
+                  as={`/cat_product/${items.id}`}
+                >
+                  <a> {items.name} </a>
+                </Link>
+              </div>
+            ))}
+          </div>
+          {/* <div>
             <img src="https://image.shutterstock.com/image-vector/guitar-vector-icon-600w-632693819.jpg" />
           </div>
           <div>
@@ -77,7 +109,7 @@ const IconCat = () => {
           </div>
           <div>
             <img src="https://image.shutterstock.com/image-vector/guitar-vector-icon-600w-632693819.jpg" />
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="box-item item2">

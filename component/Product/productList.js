@@ -127,12 +127,6 @@ const ProductList = ({ product }) => {
     );
   } else {
     buttomy = (
-      // <button
-      //   style={{ background: "green" }}
-      //   onClick={() => handelAddToCart(product.id)}
-      // >
-      //   add to cart
-      // </button>
       <div className="icon_heart" onClick={() => handelAddToCart(product.id)}>
         <FontAwesomeIcon icon={["far", "heart"]} color="gray" />
       </div>
