@@ -27,7 +27,7 @@ export const QUERY_USER = {
           price
           description
         }
-        carts {
+        fav_products {
           id
           product {
             id

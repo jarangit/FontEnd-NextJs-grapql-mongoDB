@@ -95,13 +95,15 @@ const LOG_IN = gql`
         tel
         line_id
         image_profile
+        qty_products
+        qty_fav_products
         products {
           id
           name
           price
           description
         }
-        carts {
+        fav_products {
           id
           quantity
           product {

@@ -49,12 +49,12 @@ const AccountPro = (props) => {
   if (props.dataFav.length == 0) {
     console.log("no");
   }
-  console.log(props.dataFav.length);
+  console.log(props.dataUser);
   return (
     <DivGrid className="container">
       <div>
         <Link href = '/user_products' >
-            <a><h1> สินค้าที่ชื่นชอบ </h1></a>
+            <a><h1> สินค้าของฉัน ({props.dataUser.qty_products})</h1></a>
           </Link>
         <table>
           <tr>
@@ -91,7 +91,7 @@ const AccountPro = (props) => {
 
       <div>
           <Link href = '/user_favorite_pro' >
-            <a><h1> สินค้าที่ชื่นชอบ </h1></a>
+            <a><h1> สินค้าที่ชื่นชอบ  ({props.dataUser.qty_fav_products})  </h1></a>
           </Link>
         {props.dataFav.length !== 0 ? (
           <table>

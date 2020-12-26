@@ -107,7 +107,7 @@ const ProductList = ({ product }) => {
     console.log(id);
     await addToCart({ variables: { id } });
   };
-  const cartProductId = user && user.carts.map((items) => items.product.id);
+  const cartProductId = user && user.fav_products.map((items) => items.product.id);
   let buttomy;
 
   if (user && cartProductId.includes(product.id)) {

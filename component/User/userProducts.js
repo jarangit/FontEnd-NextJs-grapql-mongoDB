@@ -14,6 +14,8 @@ export const ME = gql`
       tel
       line_id
       image_profile
+      qty_products
+      qty_fav_products
       products {
         id
         name
@@ -22,7 +24,7 @@ export const ME = gql`
         price
         createdAt
       }
-      carts{
+      fav_products{
         id
         product{
           id

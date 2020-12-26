@@ -282,7 +282,7 @@ const UserData = () => {
           )}
         </div>
       </DivGrid>
-      <AccountPro dataPro={user.products} dataFav={user.carts} />
+      <AccountPro dataPro={user.products} dataFav={user.fav_products}  dataUser = {user} />
     </>
   );
 };

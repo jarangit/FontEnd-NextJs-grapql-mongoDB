@@ -60,7 +60,7 @@ const UserCartItem = () => {
   return (
     <div className="container">
       {user &&
-        user.carts.map((items) => (
+        user.fav_products.map((items) => (
           <DivGrid key={items.id}>
             <div>
               <img src={items.product.imageUrl} width="100" />
