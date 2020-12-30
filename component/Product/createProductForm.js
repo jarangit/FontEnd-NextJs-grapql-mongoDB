@@ -83,7 +83,6 @@ const CREATE_PRODUCT = gql`
     $description: String!
     $address: String!
     $reason_sell: String
-    $shipping: [String]!
     $price: Float!
     $pd_life: Float!
     $integrity: Float!
@@ -97,7 +96,6 @@ const CREATE_PRODUCT = gql`
       description: $description
       address: $address
       reason_sell: $reason_sell
-      shipping: $shipping
       price: $price
       pd_life: $pd_life
       integrity: $integrity
@@ -120,7 +118,7 @@ const CreateProductForm = () => {
     ID_ATTPro_FromC,
     setID_ATTPro_FromC,
   } = useContext(AuthContext);
-  const [IDShipping, setIDShipping] = useState([]);
+  // const [IDShipping, setIDShipping] = useState([]);
   const [OB_IMG_S, setOB_IMG_S] = useState([]);
 
   const { data } = useQuery(ME);
@@ -133,7 +131,6 @@ const CreateProductForm = () => {
     price: "",
     address: "",
     pd_options_attr: ID_ATTPro_FromC,
-    shipping: IDShipping,
     pd_life: "",
     integrity: "",
     productCategory: ID_CatPro_FromC,
@@ -226,7 +223,6 @@ const CreateProductForm = () => {
             image_gallery: url_img_multi,
             productCategory: ID_CatPro_FromC,
             pd_options_attr: ID_ATTPro_FromC,
-            shipping: IDShipping,
           },
         });
         console.log(result);
@@ -241,7 +237,6 @@ const CreateProductForm = () => {
         price: "",
         address: "",
         pd_options_attr: "",
-        shipping: "",
         pd_life: "",
         integrity: "",
         productCategory: "",
@@ -255,17 +250,17 @@ const CreateProductForm = () => {
     }
   };
 
-  const GetID_Shipping = () => {
-    const findIdAtt = IDShipping.find((e) => e === event.target.id);
-    console.log(findIdAtt);
-    if (findIdAtt) {
-      setIDShipping(IDShipping.filter((e) => e !== event.target.id));
-    } else {
-      let idAAtt = event.target.id;
-      setIDShipping((id) => [...id, `${idAAtt}`]);
-    }
-    console.log(IDShipping);
-  };
+  // const GetID_Shipping = () => {
+  //   const findIdAtt = IDShipping.find((e) => e === event.target.id);
+  //   console.log(findIdAtt);
+  //   if (findIdAtt) {
+  //     setIDShipping(IDShipping.filter((e) => e !== event.target.id));
+  //   } else {
+  //     let idAAtt = event.target.id;
+  //     setIDShipping((id) => [...id, `${idAAtt}`]);
+  //   }
+  //   console.log(IDShipping);
+  // };
 
   const ShowGallUpload = () => {
     const url = [];
@@ -376,7 +371,7 @@ const CreateProductForm = () => {
           <C_ProForm_SELECTID_CAT />
           <C_ProForm_SELECTID_ATT />
           <hr style={{ width: "500px", margin: "0" }} />
-          <div className="createPro_box_shipment">
+          {/* <div className="createPro_box_shipment">
             <div>
               <strong>เลือกการจัดส่ง</strong>
             </div>
@@ -385,7 +380,7 @@ const CreateProductForm = () => {
             <br />
             <input id="MESS" type="checkbox" onClick={GetID_Shipping} />
             <label> จัดส่งสินค้าโดยระบบขนส่ง </label>
-          </div>
+          </div> */}
 
           <div>
             <input

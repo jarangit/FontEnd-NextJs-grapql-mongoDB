@@ -68,7 +68,6 @@ export const QUERY_PRODUCT = gql`
       image_gallery
       address
       reason_sell
-      shipping
       pd_life
       integrity
       productCategory {
@@ -114,7 +113,6 @@ const Products = () => {
     image_gallery,
     address,
     reason_sell,
-    shipping,
     pd_life,
     integrity,
     productCategory,
@@ -194,7 +192,7 @@ const Products = () => {
             <h3>ที่อยู่</h3>
             <p> {address} </p>
             <h3>การจัดส่ง</h3>
-            <p> {shipping} </p>
+            {/* <p> {shipping} </p> */}
             <h3>อายุการใช้งาน</h3>
             <p> {pd_life} </p>
             <h3>สภาพสินค้า</h3>

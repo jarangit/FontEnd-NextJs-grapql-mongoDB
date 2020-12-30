@@ -109,7 +109,6 @@ const UPDATE_PRODUCT = gql`
     $pd_life: Float
     $pd_options_attr: [String]
     $productCategory: String
-    $shipping: [String]
   ) {
     updateProduct(
       id: $id
@@ -124,7 +123,6 @@ const UPDATE_PRODUCT = gql`
       pd_life: $pd_life
       pd_options_attr: $pd_options_attr
       productCategory: $productCategory
-      shipping: $shipping
     ) {
       id
       name
@@ -154,7 +152,7 @@ const EditProduct = (props) => {
     setID_CatPro_FromEdit,
   } = useContext(AuthContext);
   const { data } = useQuery(ME);
-  const [IDShipping, setIDShipping] = useState([]);
+  // const [IDShipping, setIDShipping] = useState([]);
 
   const {
     id,
@@ -165,7 +163,6 @@ const EditProduct = (props) => {
     image_gallery,
     address,
     reason_sell,
-    shipping,
     pd_life,
     integrity,
     productCategory,
@@ -272,7 +269,6 @@ const EditProduct = (props) => {
               pd_life: +productData.pd_life,
               pd_options_attr: ID_ATTPro_FromEdit,
               productCategory: ID_CatPro_FromEdit,
-              shipping: IDShipping,
             },
           });
         }
@@ -288,7 +284,6 @@ const EditProduct = (props) => {
             pd_life: +productData.pd_life,
             pd_options_attr: ID_ATTPro_FromEdit,
             productCategory: ID_CatPro_FromEdit,
-            shipping: IDShipping,
             image_gallery: url_image_gallery,
           },
         });
@@ -303,7 +298,6 @@ const EditProduct = (props) => {
             pd_life: +productData.pd_life,
             pd_options_attr: ID_ATTPro_FromEdit,
             productCategory: ID_CatPro_FromEdit,
-            shipping: IDShipping,
           },
         });
       }
@@ -323,7 +317,6 @@ const EditProduct = (props) => {
     setfiles_image_gallery([]);
     setFile(null);
     setProductData(props.product);
-    console.log(IDShipping);
   };
   const ClickEdit_ImgGall = () => {
     setEdit_img_gall(!edit_img_gall);
@@ -332,20 +325,20 @@ const EditProduct = (props) => {
 
   // Get Shipping ID
 
-  const GetID_Shipping = () => {
-    const findIdAtt = IDShipping.find((e) => e === event.target.id);
-    if (findIdAtt) {
-      setIDShipping(IDShipping.filter((e) => e !== event.target.id));
-    } else {
-      let idAAtt = event.target.id;
-      setIDShipping((id) => [...id, `${idAAtt}`]);
-    }
-  };
+  // const GetID_Shipping = () => {
+  //   const findIdAtt = IDShipping.find((e) => e === event.target.id);
+  //   if (findIdAtt) {
+  //     setIDShipping(IDShipping.filter((e) => e !== event.target.id));
+  //   } else {
+  //     let idAAtt = event.target.id;
+  //     setIDShipping((id) => [...id, `${idAAtt}`]);
+  //   }
+  // };
 
   /////////////////////////////////////////////
 
   useEffect(() => {
-    setIDShipping(productData.shipping);
+    // setIDShipping(productData.shipping);
 
     if (edit) {
       setProductData(props.product);
@@ -355,13 +348,13 @@ const EditProduct = (props) => {
     }
     //เช็คสินค้าว่าติ้กการจัดส่งยังไง
 
-    props.product.shipping.map((item, index) => {
-      if (item === "UTU") {
-        setUTU(true);
-      } else if (item === "MESS") {
-        setMESS(true);
-      }
-    });
+    // props.product.shipping.map((item, index) => {
+    //   if (item === "UTU") {
+    //     setUTU(true);
+    //   } else if (item === "MESS") {
+    //     setMESS(true);
+    //   }
+    // });
 
     //
   }, [data]);
@@ -392,7 +385,6 @@ const EditProduct = (props) => {
             pd_life: +productData.pd_life,
             pd_options_attr: ID_ATTPro_FromEdit,
             productCategory: ID_CatPro_FromEdit,
-            shipping: IDShipping,
             image_gallery: url_image_gallery,
           },
         });
@@ -407,7 +399,6 @@ const EditProduct = (props) => {
             pd_life: +productData.pd_life,
             pd_options_attr: ID_ATTPro_FromEdit,
             productCategory: ID_CatPro_FromEdit,
-            shipping: IDShipping,
           },
         });
       }
@@ -591,7 +582,7 @@ const EditProduct = (props) => {
             <p> ราคา: {price} </p>
             <p> ที่อยู่: {address} </p>
             <p> เหตุผลที่ขาย: {reason_sell} </p>
-            <p> การจัดส่ง: {shipping} </p>
+            {/* <p> การจัดส่ง: {shipping} </p> */}
             <p> อายุการใช้งาน: {pd_life} เดือน</p>
             <p> สภาพสินค้า: {integrity} % </p>
 
@@ -659,7 +650,7 @@ const EditProduct = (props) => {
               ></input>{" "}
               <div>
                 <p>การจัดส่ง</p>
-                <input
+                {/* <input
                   type="checkbox"
                   id="UTU"
                   defaultChecked={UTU}
@@ -671,7 +662,7 @@ const EditProduct = (props) => {
                   id="MESS"
                   defaultChecked={MESS}
                   onClick={GetID_Shipping}
-                />
+                /> */}
                 <label> จัดส่งสินค้าโดยระบบค้นส่ง </label>
               </div>
               <p>สภาพสินค้า (%)</p>
